@@ -54,15 +54,99 @@ $font-sans-serif: 'mastodon-font-sans-serif' !default;
 $font-display: 'mastodon-font-display' !default;
 $font-monospace: 'mastodon-font-monospace' !default;
 
+.largeLogo{
+    width: 60%;
+    height: 60%;
+}
+.mediumLogo{
+    width: 40%;
+    height: 40%;
+}
+.smallLogo{
+    width: 20%;
+    height: 20%;
+}
+
 
 @import 'application';
 @import 'BTJ-icons';
-@import '../styles/btj/assets/tether/tether.min.css';
-@import '../styles/btj/assets/bootstrap/css/bootstrap.min.css';
-@import '../styles/btj/assets/bootstrap/css/bootstrap-grid.min.css';
-@import '../styles/btj/assets/bootstrap/css/bootstrap-reboot.min.css';
-@import '../styles/btj/assets/socicon/css/styles';
-@import '../styles/btj/assets/theme/css/style';
-@import '../styles/btj/assets/btj/css/mbr-additional';
-@import '../styles/btj/assets/dropdown/css/style';
-// @import '../styles/btj/assets/fontawesome/css/all.min.css';
+@import '../styles/btj_landing/assets/tether/tether.min.css';
+@import '../styles/btj_landing/assets/bootstrap/css/bootstrap.min.css';
+@import '../styles/btj_landing/assets/bootstrap/css/bootstrap-grid.min.css';
+@import '../styles/btj_landing/assets/bootstrap/css/bootstrap-reboot.min.css';
+@import '../styles/btj_landing/assets/socicon/css/styles';
+@import '../styles/btj_landing/assets/theme/css/style';
+@import '../styles/btj_landing/assets/btj/css/mbr-additional';
+@import '../styles/btj_landing/assets/dropdown/css/style';
+
+
+
+@import '../styles/custom_dd/assets/sass/libs/vars';
+@import '../styles/custom_dd/assets/sass/libs/functions';
+@import '../styles/custom_dd/assets/sass/libs/mixins';
+@import '../styles/custom_dd/assets/sass/libs/vendor';
+@import '../styles/custom_dd/assets/sass/libs/breakpoints';
+@import '..styles/../custom_dd/assets/css/fontawesome-all.min.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+.animated-bg{
+    background: linear-gradient(59deg, #0c5776, #b4672f, #0c5776);
+    background-size: 600% 600%;
+    
+    -webkit-animation: DingDash 14s ease infinite;
+    -moz-animation: DingDash 14s ease infinite;
+    -o-animation: DingDash 14s ease infinite;
+    animation: DingDash 14s ease infinite;
+    
+    @-webkit-keyframes DingDash {
+        0%{background-position:0% 96%}
+        50%{background-position:100% 5%}
+        100%{background-position:0% 96%}
+    }
+    @-moz-keyframes DingDash {
+        0%{background-position:0% 96%}
+        50%{background-position:100% 5%}
+        100%{background-position:0% 96%}
+    }
+    @-o-keyframes DingDash {
+        0%{background-position:0% 96%}
+        50%{background-position:100% 5%}
+        100%{background-position:0% 96%}
+    }
+    @keyframes DingDash { 
+        0%{background-position:0% 96%}
+        50%{background-position:100% 5%}
+        100%{background-position:0% 96%}
+    }
+    
+}
+.simple_form input[type="text"], .simple_form input[type="number"], 
+.simple_form input[type="email"], 
+.simple_form input[type="password"], .simple_form textarea{
+    
+    font-size: 18px;
+    color: #ffffff;   
+    width: 100%;   
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.35);;
+    border-radius: 6px;
+    padding: 15px;
+}
+.simple_form input[type="text"], .simple_form input[type="number"], 
+.simple_form input[type="email"], 
+.simple_form input[type="password"], .simple_form textarea{    
+    &:focus, &:hover{
+    background: rgba(255,255,255,0.075) !important;    
+    border-color: #1cb495 !important;
+    color: white;
+    }
+}
+.simple_form button, .simple_form .button, .simple_form .block-button{
+    background-color: #1cb495;
+}
+.simple_form button, .simple_form .button, .simple_form .block-button{
+    &:hover{
+    background-color: #1fcaa7;
+    color:white;
+    }
+}
