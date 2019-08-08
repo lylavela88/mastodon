@@ -113,7 +113,8 @@ class Auth::SessionsController < Devise::SessionsController
   end
 
   def set_body_classes
-    @body_classes = 'animated-bg'
+    @body_classes = 'lighter'
+    # @body_classes = 'animated-bg'
   end
 
   def home_paths(resource)
