@@ -61,7 +61,8 @@ section {
   background-repeat: no-repeat;
   background-size: cover; }
   section .mbr-background-video,
-  section .mbr-background-video-preview {
+  section .mbr-background-video-preview,
+  section .mbr-ba {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -265,7 +266,8 @@ nav .mbr-section-btn {
   -webkit-align-items: center;
   min-height: 100vh;
   padding-top: 3rem;
-  padding-bottom: 3rem; }
+  padding-bottom: 3rem; 
+}
 
 /*! Map */
 .map {
