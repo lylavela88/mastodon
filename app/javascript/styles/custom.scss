@@ -1,58 +1,58 @@
 // Commonly used web colors
-$black: #000000;            // Black
-$white: #ffffff;            // White
-$success-green: #79bd9a !default;    // Padua
-$error-red: #df405a !default;        // Cerise
-$warning-red: #ff5050 !default;      // Sunset Orange
-$gold-star: #ca8f04 !default;        // Dark Goldenrod
+// $black: #000000;            // Black
+// $white: #ffffff;            // White
+// $success-green: #79bd9a !default;    // Padua
+// $error-red: #df405a !default;        // Cerise
+// $warning-red: #ff5050 !default;      // Sunset Orange
+// $gold-star: #ca8f04 !default;        // Dark Goldenrod
 
 
-$classic-base-color: #1cb495;
-$classic-primary-color: $white;      // Echo Blue
-$classic-secondary-color: #d9e1e8;    // Pattens Blue
-$classic-highlight-color: #2b90d9;    // Summer Sky
+// $classic-base-color: #1cb495;
+// $classic-primary-color: $white;      // Echo Blue
+// $classic-secondary-color: #d9e1e8;    // Pattens Blue
+// $classic-highlight-color: #2b90d9;    // Summer Sky
 
 
-// Variables for defaults in UI
-$base-shadow-color: $black !default;
-$base-overlay-background: $black !default;
-$base-border-color: $white !default;
-$simple-background-color: $white !default;
-$valid-value-color: $success-green !default;
-$error-value-color: $error-red !default;
+// // Variables for defaults in UI
+// $base-shadow-color: $black !default;
+// $base-overlay-background: $black !default;
+// $base-border-color: $white !default;
+// $simple-background-color: $white !default;
+// $valid-value-color: $success-green !default;
+// $error-value-color: $error-red !default;
 
-// Tell UI to use selected colors
-$ui-base-color: $classic-base-color !default;                  // Darkest
-$ui-base-lighter-color: lighten($ui-base-color, 26%) !default; // Lighter darkest
-$ui-primary-color: $classic-primary-color !default;            // Lighter
-$ui-secondary-color: $classic-secondary-color !default;        // Lightest
-$ui-highlight-color: $classic-highlight-color !default;
+// // Tell UI to use selected colors
+// $ui-base-color: $classic-base-color !default;                  // Darkest
+// $ui-base-lighter-color: lighten($ui-base-color, 26%) !default; // Lighter darkest
+// $ui-primary-color: $classic-primary-color !default;            // Lighter
+// $ui-secondary-color: $classic-secondary-color !default;        // Lightest
+// $ui-highlight-color: $classic-highlight-color !default;
 
-// Variables for texts
-$primary-text-color: $white !default;
-$darker-text-color: $ui-primary-color !default;
-$dark-text-color: $ui-base-lighter-color !default;
-$secondary-text-color: $ui-secondary-color !default;
-$highlight-text-color: $ui-highlight-color !default;
-$action-button-color: $ui-base-lighter-color !default;
-// For texts on inverted backgrounds
-$inverted-text-color: $ui-base-color !default;
-$lighter-text-color: $ui-base-lighter-color !default;
-$light-text-color: $ui-primary-color !default;
+// // Variables for texts
+// $primary-text-color: $white !default;
+// $darker-text-color: $ui-primary-color !default;
+// $dark-text-color: $ui-base-lighter-color !default;
+// $secondary-text-color: $ui-secondary-color !default;
+// $highlight-text-color: $ui-highlight-color !default;
+// $action-button-color: $ui-base-lighter-color !default;
+// // For texts on inverted backgrounds
+// $inverted-text-color: $ui-base-color !default;
+// $lighter-text-color: $ui-base-lighter-color !default;
+// $light-text-color: $ui-primary-color !default;
 
-// Language codes that uses CJK fonts
-$cjk-langs: ja, ko, zh-CN, zh-HK, zh-TW;
+// // Language codes that uses CJK fonts
+// $cjk-langs: ja, ko, zh-CN, zh-HK, zh-TW;
 
-// Variables for components
-$media-modal-media-max-width: 100%;
-// put margins on top and bottom of image to avoid the screen covered by image.
-$media-modal-media-max-height: 80%;
+// // Variables for components
+// $media-modal-media-max-width: 100%;
+// // put margins on top and bottom of image to avoid the screen covered by image.
+// $media-modal-media-max-height: 80%;
 
-$no-gap-breakpoint: 415px;
+// $no-gap-breakpoint: 415px;
 
-$font-sans-serif: 'mastodon-font-sans-serif' !default;
-$font-display: 'mastodon-font-display' !default;
-$font-monospace: 'mastodon-font-monospace' !default;
+// $font-sans-serif: 'mastodon-font-sans-serif' !default;
+// $font-display: 'mastodon-font-display' !default;
+// $font-monospace: 'mastodon-font-monospace' !default;
 
 .largeLogo{
     width: 60%;
@@ -67,6 +67,9 @@ $font-monospace: 'mastodon-font-monospace' !default;
     height: 20%;
 }
 
+body{
+    overflow-x: hidden !important;
+}
 
 @import 'application';
 @import 'BTJ-icons';
@@ -80,13 +83,6 @@ $font-monospace: 'mastodon-font-monospace' !default;
 @import '../styles/btj_landing/assets/dropdown/css/style';
 
 
-
-@import '../styles/custom_dd/assets/sass/libs/vars';
-@import '../styles/custom_dd/assets/sass/libs/functions';
-@import '../styles/custom_dd/assets/sass/libs/mixins';
-@import '../styles/custom_dd/assets/sass/libs/vendor';
-@import '../styles/custom_dd/assets/sass/libs/breakpoints';
-@import '..styles/../custom_dd/assets/css/fontawesome-all.min.css';
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
 .animated-bg{
@@ -128,7 +124,7 @@ $font-monospace: 'mastodon-font-monospace' !default;
     color: #ffffff;   
     width: 100%;   
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.35);;
+    border: 2px solid rgba(255, 255, 255, 0.35);
     border-radius: 6px;
     padding: 15px;
 }
@@ -150,3 +146,20 @@ $font-monospace: 'mastodon-font-monospace' !default;
     color:white;
     }
 }
+.simple_form .label_input__append::after{
+    background-image: none !important;
+}
+.mbr-fullscreen-img {
+    background: url(../styles/btj_landing/assets/images/dingdashbg.png) no-repeat fixed; 
+    background-size:cover;
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    align-items: center;
+    -webkit-align-items: center;
+    min-height: 100vh;
+    padding-top: 3rem;
+    padding-bottom: 3rem; 
+  }

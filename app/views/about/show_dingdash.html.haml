@@ -53,11 +53,11 @@
               = link_to t('auth.login'), new_user_session_path, class: 'nav-link link text-white display-4 webapp-btn'              
             
     / data-bg-video="https://www.youtube.com/watch?v=ynkKL3R0rhc"
-    %section#header2-1.cid-qTkA127IK8.mbr-fullscreen
+    %section#header2-1.cid-qTkA127IK8.mbr-fullscreen-img
       #top.w-100
-        %video#myVideo.fullscreen-bg__video{:autoplay => "", :controls => "controls", :loop => "", :muted => ""}
-          %source{:src => "assets/Sunset-Couple.mp4", :type => "video/mp4"}
-          / <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4">
+        -# %video#myVideo{:autoplay => "false", :controls => "controls", :loop => "false", :muted => ""}
+        -#   %source{:src => "assets/Sunset-Couple.mp4", :type => "video/mp4"}
+        -# %img{:alt => "BTJ", :src => "assets/dingdashbg.png", :style => ""}/
         .mbr-overlay{:style => "opacity: 0.3; background-color: rgb(27, 110, 133);"}
         .container.align-center
           .row.justify-content-md-center
@@ -94,7 +94,7 @@
                 Netizens have the right to be forgotten if they decided to delete their account.
           .card.p-3.col-12.col-md-6.col-lg-4
             .card-img.pb-3
-              %span.fa.fa-spider.text-info
+              %i.fa.fa-chain-broken.fa-5x.text-info
             .card-box
               %h4.card-title.py-3.mbr-fonts-style.display-5
                 Live Free or Die Trying
@@ -105,7 +105,7 @@
         .media-container-row
           .card.p-3.col-12.col-md-6.col-lg-4
             .card-img.pb-3
-              %span.fa.fa-volume-up.text-secondary
+              %i.fa.fa-bullhorn.fa-5x.text-secondary
             .card-box
               %h4.card-title.py-3.mbr-fonts-style.display-5
                 Speak Your Mind
@@ -113,7 +113,7 @@
                 Speak your mind and mind your own business. Everyone deserves the right to freedom of speech, freedom of religion, and freedom of thought.
           .card.p-3.col-12.col-md-6.col-lg-4
             .card-img.pb-3
-              %span.fa.fa-globe.fa-5x
+              %i.fa.fa-globe.fa-5x.text-blue
             .card-box
               %h4.card-title.py-3.mbr-fonts-style.display-5
                 Connect with anyone, anywhere.
@@ -121,7 +121,7 @@
                 People from all over the world are connected to Ding Dash. Join in on the conversation!
           .card.p-3.col-12.col-md-6.col-lg-4
             .card-img.pb-3
-              %span.fa.fa-snowboarding.text-warning
+              %i.fa.fa-rocket.text-warning.fa-5x
             .card-box
               %h4.card-title.py-3.mbr-fonts-style.display-5
                 Most of All, Have Fun!
