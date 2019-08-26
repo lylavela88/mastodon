@@ -114,6 +114,7 @@ class Auth::SessionsController < Devise::SessionsController
 
   def set_body_classes
     @body_classes = 'lighter'
+    #keeping this file and code in case sessions_controller.rb is overwritten. Below will set styles back to BTJ - EG 08.26.2019
     # @body_classes = 'animated-bg'
   end
 
