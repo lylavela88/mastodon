@@ -89,7 +89,8 @@ class Auth::RegistrationsController < Devise::RegistrationsController
   def set_body_classes
     @body_classes = %w(edit update).include?(action_name) ? 'admin' : 'lighter'
   end
-  # def set_body_classes_dd
+  # holding this file in case registrations_controller_dd.rb is copied over. The below code will set it back to BTJ style. EG 08.26.2019
+  # def set_body_classes_dd holding this file 
   #   @body_classes = %w(edit update).include?(action_name) ? 'admin' : 'animated-bg'
   # end
 
