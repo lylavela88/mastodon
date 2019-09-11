@@ -35,11 +35,11 @@ module StatusesHelper
   end
 
   def svg_logo_dd
-    tag(:img, { :src => "../assets/logoBTJ.png", :class => "smallerLogo"}, false)
+    tag(:img, { :src => "../btj_styles/logoBTJ.png", :class => "smallLogo", :width => '300px', :height => '100px' }, false)
   end
 
   def svg_logo_full_dd
-    tag(:img, { :src => "../assets/logoBTJ.png", :class => "largeLogo"}, false)
+    tag(:img, { :src => "../btj_styles/logoBTJ.png", :class => "smallLogo"}, false)
   end
 
   def svg_logo
