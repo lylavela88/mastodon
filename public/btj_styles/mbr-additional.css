@@ -4,7 +4,7 @@ body {
   line-height: 1.5;
 }
 .mbr-fullscreen-img {
-  background: url(../btj_styles/dingdashbg.png) no-repeat fixed; 
+  background: url(../btj_styles/dingdashbg.jpg) no-repeat fixed; 
   background-size:cover;
   display: flex;
   display: -webkit-flex;
