@@ -1483,12 +1483,18 @@ a.account__display-name {
   position: absolute;
 
   .star-icon {
-    color: $gold-star;
+     color: $gold-star;    
   }
 }
 
 .star-icon.active {
-  color: $gold-star;
+   color: $gold-star;  
+}
+.heart-icon{
+  color: $error-red;
+}
+.heart-icon.active{
+  color: $error-red;
 }
 
 .notification__display-name {
