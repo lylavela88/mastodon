@@ -149,11 +149,13 @@ class Notification extends ImmutablePureComponent {
         <div className='notification notification-favourite focusable' tabIndex='0' aria-label={notificationForScreenReader(intl, intl.formatMessage({ id: 'notification.favourite', defaultMessage: '{name} favourited your status' }, { name: notification.getIn(['account', 'acct']) }), notification.get('created_at'))}>
           <div className='notification__message'>
             <div className='notification__favourite-icon-wrapper'>
-              <Icon id='star' className='star-icon' fixedWidth />
+              {/* EG 12.19.2019  <Icon id='star' className='star-icon' fixedWidth /> */}
+              <Icon id='heart' className='star-icon' fixedWidth />
             </div>
 
             <span title={notification.get('created_at')}>
-              <FormattedMessage id='notification.favourite' defaultMessage='{name} favourited your status' values={{ name: link }} />
+              {/* <FormattedMessage id='notification.favourite' defaultMessage='{name} favourited your status' values={{ name: link }} /> */}
+              <FormattedMessage id='notification.favourite' defaultMessage='{name} liked your status' values={{ name: link }} />
             </span>
           </div>
 
