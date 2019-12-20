@@ -1860,11 +1860,11 @@
         "id": "notification.follow"
       },
       {
-        "defaultMessage": "{name} favourited your status",
+        "defaultMessage": "{name} liked your status",
         "id": "notification.favourite"
       },
       {
-        "defaultMessage": "{name} boosted your status",
+        "defaultMessage": "{name} is praying",
         "id": "notification.reblog"
       },
       {

@@ -249,7 +249,7 @@
   "navigation_bar.profile_directory": "Profile directory",
   "navigation_bar.public_timeline": "Llinia temporal federada",
   "navigation_bar.security": "Seguranza",
-  "notification.favourite": "{name} favourited your status",
+  "notification.favourite": "{name} liked your status",
   "notification.follow": "{name} siguióte",
   "notification.mention": "{name} mentóte",
   "notification.poll": "A poll you have voted in has ended",
