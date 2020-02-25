@@ -268,7 +268,7 @@ namespace :mastodon do
 
         env['SMTP_FROM_ADDRESS'] = prompt.ask('E-mail address to send e-mails "from":') do |q|
           q.required true
-          q.default "Mastodon <notifications@#{env['LOCAL_DOMAIN']}>"
+          q.default "DingDash <notifications@#{env['LOCAL_DOMAIN']}>"
           q.modify :strip
         end
 
