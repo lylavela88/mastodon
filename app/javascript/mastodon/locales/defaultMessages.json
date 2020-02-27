@@ -405,7 +405,7 @@
         "id": "status.filtered"
       },
       {
-        "defaultMessage": "Pinned toot",
+        "defaultMessage": "Pinned ding",
         "id": "status.pinned"
       },
       {
@@ -493,7 +493,7 @@
         "id": "account.posts"
       },
       {
-        "defaultMessage": "Toots and replies",
+        "defaultMessage": "Dings and replies",
         "id": "account.posts_with_replies"
       },
       {
@@ -552,7 +552,7 @@
         "id": "empty_column.account_unavailable"
       },
       {
-        "defaultMessage": "No toots here!",
+        "defaultMessage": "No dings here!",
         "id": "empty_column.account_timeline"
       }
     ],
@@ -637,7 +637,7 @@
         "id": "account.show_reblogs"
       },
       {
-        "defaultMessage": "Pinned toots",
+        "defaultMessage": "Pinned dings",
         "id": "navigation_bar.pins"
       },
       {
@@ -761,7 +761,7 @@
         "id": "account.edit_profile"
       },
       {
-        "defaultMessage": "Pinned toots",
+        "defaultMessage": "Pinned dings",
         "id": "navigation_bar.pins"
       },
       {
@@ -1124,11 +1124,11 @@
         "id": "compose_form.lock_disclaimer.lock"
       },
       {
-        "defaultMessage": "This toot won't be listed under any hashtag as it is unlisted. Only public toots can be searched by hashtag.",
+        "defaultMessage": "This toot won't be listed under any hashtag as it is unlisted. Only public dings can be searched by hashtag.",
         "id": "compose_form.hashtag_warning"
       },
       {
-        "defaultMessage": "This toot will only be sent to all the mentioned users.",
+        "defaultMessage": "This ding will only be sent to all the mentioned users.",
         "id": "compose_form.direct_message_warning"
       },
       {
@@ -1169,7 +1169,7 @@
         "id": "navigation_bar.logout"
       },
       {
-        "defaultMessage": "Compose new toot",
+        "defaultMessage": "Compose new ding",
         "id": "navigation_bar.compose"
       }
     ],
@@ -1212,7 +1212,7 @@
         "id": "column.favourites"
       },
       {
-        "defaultMessage": "You don't have any favourite toots yet. When you favourite one, it will show up here.",
+        "defaultMessage": "You don't have any favourite dings yet. When you favourite one, it will show up here.",
         "id": "empty_column.favourited_statuses"
       }
     ],
@@ -1221,7 +1221,7 @@
   {
     "descriptors": [
       {
-        "defaultMessage": "No one has favourited this toot yet. When someone does, they will show up here.",
+        "defaultMessage": "No one has favourited this ding yet. When someone does, they will show up here.",
         "id": "empty_column.favourites"
       }
     ],
@@ -1330,7 +1330,7 @@
         "id": "navigation_bar.mutes"
       },
       {
-        "defaultMessage": "Pinned toots",
+        "defaultMessage": "Pinned dings",
         "id": "navigation_bar.pins"
       },
       {
@@ -1491,7 +1491,7 @@
         "id": "introduction.interactions.reply.headline"
       },
       {
-        "defaultMessage": "You can reply to other people's and your own toots, which will chain them together in a conversation.",
+        "defaultMessage": "You can reply to other people's and your own dings, which will chain them together in a conversation.",
         "id": "introduction.interactions.reply.text"
       },
       {
@@ -1499,7 +1499,7 @@
         "id": "introduction.interactions.reblog.headline"
       },
       {
-        "defaultMessage": "You can share other people's toots with your followers by boosting them.",
+        "defaultMessage": "You can share other people's dings with your followers by boosting them.",
         "id": "introduction.interactions.reblog.text"
       },
       {
@@ -1507,7 +1507,7 @@
         "id": "introduction.interactions.favourite.headline"
       },
       {
-        "defaultMessage": "You can save a toot for later, and let the author know that you liked it, by favouriting it.",
+        "defaultMessage": "You can save a ding for later, and let the author know that you liked it, by favouriting it.",
         "id": "introduction.interactions.favourite.text"
       },
       {
@@ -1624,7 +1624,7 @@
         "id": "keyboard_shortcuts.favourites"
       },
       {
-        "defaultMessage": "to open pinned toots list",
+        "defaultMessage": "to open Pinned dings list",
         "id": "keyboard_shortcuts.pinned"
       },
       {
@@ -1903,7 +1903,7 @@
   {
     "descriptors": [
       {
-        "defaultMessage": "Pinned toot",
+        "defaultMessage": "Pinned ding",
         "id": "column.pins"
       }
     ],
@@ -1925,7 +1925,7 @@
   {
     "descriptors": [
       {
-        "defaultMessage": "No one has boosted this toot yet. When someone does, they will show up here.",
+        "defaultMessage": "No ones has boosted this ding yet. When someone does, they will show up here.",
         "id": "status.reblogs.empty"
       }
     ],
