@@ -1018,7 +1018,7 @@ en_GB:
         suspend: Your account %{acct} has been suspended
       title:
         disable: Account frozen
-        none: WarningMastodon
+        none: Warning
         silence: Account limited
         suspend: Account suspended
     welcome:
