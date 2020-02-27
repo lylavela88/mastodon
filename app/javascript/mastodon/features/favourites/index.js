@@ -46,7 +46,7 @@ class Favourites extends ImmutablePureComponent {
       );
     }
 
-    const emptyMessage = <FormattedMessage id='empty_column.favourites' defaultMessage='No one has favourited this toot yet. When someone does, they will show up here.' />;
+    const emptyMessage = <FormattedMessage id='empty_column.favourites' defaultMessage='No one has favourited this ding yet. When someone does, they will show up here.' />;
 
     return (
       <Column>
