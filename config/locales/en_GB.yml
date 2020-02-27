@@ -11,7 +11,7 @@ en_GB:
     apps: Mobile apps
     apps_platforms: Use Mastodon from iOS, Android and other platforms
     browse_directory: Browse a profile directory and filter by interests
-    browse_public_posts: Browse a live stream of public posts on Mastodon
+    browse_public_posts: Browse a live stream of public posts on DingDash
     contact: Contact
     contact_missing: Not set
     contact_unavailable: N/A
@@ -39,7 +39,7 @@ en_GB:
       one: user
       other: users
     user_count_before: Home to
-    what_is_mastodon: What is Mastodon?
+    what_is_mastodon: What is DingDash?
   accounts:
     choices_html: "%{name}'s choices:"
     follow: Follow
@@ -1002,7 +1002,7 @@ en_GB:
     wrong_code: The entered code was invalid! Are server time and device time correct?
   user_mailer:
     backup_ready:
-      explanation: You requested a full backup of your Mastodon account. It's now ready for download!
+      explanation: You requested a full backup of your DingDash account. It's now ready for download!
       subject: Your archive is ready for download
       title: Archive takeout
     warning:
