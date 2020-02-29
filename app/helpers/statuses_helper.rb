@@ -35,11 +35,11 @@ module StatusesHelper
   end
 
   def svg_logo_dd
-    content_tag(:svg, tag(:use, 'xlink:href' => '#btj-svg-logo'), 'viewBox' => '0 0 216.4144 232.00976')
+    content_tag(:svg, tag(:use, 'xlink:href' => '#btj-svg-logo-full'), 'viewBox' => '0 0 216.4144 232.00976')
   end
 
   def svg_logo_full_dd
-    content_tag(:svg, tag(:use, 'xlink:href' => '#btj-svg-logo'), 'viewBox' => '0 0 216.4144 232.00976')
+    content_tag(:svg, tag(:use, 'xlink:href' => '#btj-svg-logo-full'), 'viewBox' => '0 0 216.4144 232.00976')
   end
 
   def svg_logo
