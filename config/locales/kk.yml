@@ -314,11 +314,11 @@ kk:
     relays:
       add_new: Жаңа арна қосу
       delete: Өшіру
-      description_html: A <strong>fedеration relay</strong> is an intermediary server that exchanges large volumes of public toots between servers that subscribe and publish to it. <strong>It can help small and medium servers discover content from the fediverse</strong>, which would otherwise require local users manually following other people on remote servers.
+      description_html: A <strong>fedеration relay</strong> is an intermediary server that exchanges large volumes of public dings between servers that subscribe and publish to it. <strong>It can help small and medium servers discover content from the fediverse</strong>, which would otherwise require local users manually following other people on remote servers.
       disable: Сөндіру
       disabled: Сөндірілді
       enable: Қосу
-      enable_hint: Once enabled, your server will subscribe to all public toots from this rеlay, and will begin sending this server's public toots to it.
+      enable_hint: Once enabled, your server will subscribe to all public dings from this rеlay, and will begin sending this server's public dings to it.
       enabled: Қосылды
       inbox_url: Арна URL
       pending: Жаңа арна құпталуын күту
