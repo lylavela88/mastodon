@@ -111,7 +111,7 @@ class Compose extends React.PureComponent {
             <ComposeFormContainer />
 
             <div className='drawer__inner__mastodon'>
-            <img alt='' draggable='false' resizeMode="contain" style={{ width: 200, height: 200, left:'30%', position:'relative' }} src={mascot || ddWhiteLogo} />
+            <img alt='' draggable='false' resizeMode="contain" style={{ width: 200, height: 200, left:'25%', position:'relative' }} src={mascot || ddWhiteLogo} />
               {/* <img alt='' draggable='false' src={mascot || elephantUIPlane} /> */}
             </div>
           </div>}
