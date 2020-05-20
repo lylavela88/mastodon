@@ -711,8 +711,8 @@ en_GB:
         other: "%{count} new notifications since your last visit \U0001F418"
       title: In your absence...
     favourite:
-      body: 'Your status was favourited by %{name}:'
-      subject: "%{name} favourited your status"
+      body: 'Your status was liked by %{name}:'
+      subject: "%{name} liked your status"
       title: New favourite
     follow:
       body: "%{name} is now following you!"
