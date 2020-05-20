@@ -19,24 +19,16 @@ class ManifestSerializer < ActiveModel::Serializer
 
   def description
     strip_tags(object.site_short_description.presence || I18n.t('about.about_mastodon_html'))
-  end
+  end  
+
   def icons
     [
       {
-        src: '/fullDDLogo.png',
-        sizes: '957x213',
+        src: '/android-chrome-192x192.png',
+        sizes: '192x192',
         type: 'image/png',
       },
     ]
-
-  # def icons
-  #   [
-  #     {
-  #       src: '/android-chrome-192x192.png',
-  #       sizes: '192x192',
-  #       type: 'image/png',
-  #     },
-  #   ]
   end
 
   def theme_color
