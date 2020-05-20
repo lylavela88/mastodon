@@ -12,7 +12,8 @@ import Motion from '../ui/util/optional_motion';
 import spring from 'react-motion/lib/spring';
 import SearchResultsContainer from './containers/search_results_container';
 import { changeComposing } from '../../actions/compose';
-import elephantUIPlane from '../../../images/elephant_ui_plane.svg';
+// import elephantUIPlane from '../../../images/elephant_ui_plane.svg';
+import ddWhiteLogo from '../../../images/DDlogo.png';
 import { mascot } from '../../initial_state';
 import Icon from 'mastodon/components/icon';
 
@@ -110,7 +111,8 @@ class Compose extends React.PureComponent {
             <ComposeFormContainer />
 
             <div className='drawer__inner__mastodon'>
-              <img alt='' draggable='false' src={mascot || elephantUIPlane} />
+            <img alt='' draggable='false' resizeMode="contain" style={{ width: 200, height: 200, left:'30%', position:'relative' }} src={mascot || ddWhiteLogo} />
+              {/* <img alt='' draggable='false' src={mascot || elephantUIPlane} /> */}
             </div>
           </div>}
 
