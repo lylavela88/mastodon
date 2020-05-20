@@ -24,10 +24,10 @@ class ManifestSerializer < ActiveModel::Serializer
   def icons
     [
       {
-        src: '/fullLogo-192x192.png',
+        src: '/android-chrome-192x192.png',
         sizes: '192x192',
         type: 'image/png',
-      },
+      }
     ]
   end
 
@@ -36,7 +36,7 @@ class ManifestSerializer < ActiveModel::Serializer
   end
 
   def background_color
-    '#1ab595'
+    '#FFFFFF'
   end
 
   def display
