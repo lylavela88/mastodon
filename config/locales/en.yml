@@ -729,7 +729,7 @@ en:
       title: In your absence...
     favourite:
       body: 'Your status was favourited by %{name}:'
-      subject: "%{name} favourited your status"
+      subject: "%{name} liked your status"
       title: New favourite
     follow:
       body: "%{name} is now following you!"
