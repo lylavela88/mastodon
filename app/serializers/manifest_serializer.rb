@@ -36,7 +36,7 @@ class ManifestSerializer < ActiveModel::Serializer
   end
 
   def background_color
-    '#191b22'
+    '#1ab595'
   end
 
   def display
@@ -48,7 +48,7 @@ class ManifestSerializer < ActiveModel::Serializer
   end
 
   def scope
-    root_url
+    'root_url'
   end
 
   def share_target
