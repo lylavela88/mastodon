@@ -1,5 +1,5 @@
 [{
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target" : { "namespace": "android_app", "package_name": "com.dingdash.androidapp",
-                 "sha256_cert_fingerprints": ["D1:8D:C9:BA:C6:B7:C0:97:C2:76:79:33:BD:C1:4E:7F:F5:C7:CB:3D:EB:A5:C0:0E:98:8C:55:8B:7E:0B:5B:66"] }
+        "sha256_cert_fingerprints": ["5B:27:EB:E4:41:DD:58:46:29:09:83:90:C2:9A:31:0F:45:3C:B5:8F:97:E1:1B:0A:A8:26:63:44:2D:55:19:63"] }
   }]
