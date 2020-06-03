@@ -15,3 +15,7 @@
 
     %div
       = t('errors.noscript_html', apps_path: 'https://joinmastodon.org/apps')
+:javascript
+    import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+    const el = document.createElement('pwa-update');
+    document.body.appendChild(el);

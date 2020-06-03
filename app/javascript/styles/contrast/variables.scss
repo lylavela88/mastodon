@@ -11,8 +11,8 @@ $ui-primary-color: $classic-primary-color !default;
 $ui-secondary-color: $classic-secondary-color !default;
 
 // Differences
-$ui-highlight-color: #2b5fd9;
-
+// $ui-highlight-color: #2b5fd9;
+$ui-highlight-color: #1ab595;
 $darker-text-color: lighten($ui-primary-color, 20%) !default;
 $dark-text-color: lighten($ui-primary-color, 12%) !default;
 $secondary-text-color: lighten($ui-secondary-color, 6%) !default;
