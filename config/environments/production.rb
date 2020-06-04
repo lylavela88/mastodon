@@ -93,9 +93,9 @@ Rails.application.configure do
   }
 
   config.action_mailer.delivery_method = ENV.fetch('SMTP_DELIVERY_METHOD', 'smtp').to_sym
-
+  # 'Server'                 => 'Mastodon',
   config.action_dispatch.default_headers = {
-    'Server'                 => 'Mastodon',
+    'Server'                 => 'Ding Dash',
     'X-Frame-Options'        => 'DENY',
     'X-Content-Type-Options' => 'nosniff',
     'X-XSS-Protection'       => '1; mode=block',
