@@ -96,7 +96,7 @@ Rails.application.configure do
   # 'Server'                 => 'Mastodon',
   config.action_dispatch.default_headers = {
     'Server'                 => 'Mastodon',
-    'X-Frame-Options'        => 'ALLOWALL',
+    'X-Frame-Options'        => 'DENY',
     'X-Content-Type-Options' => 'nosniff',
     'X-XSS-Protection'       => '1; mode=block',
   }
