@@ -9,12 +9,12 @@ assets_host ||= "http#{Rails.configuration.x.use_https ? 's' : ''}://#{base_host
 Rails.application.config.content_security_policy do |p|
   p.base_uri        :none
   p.default_src     :none
-  p.frame_ancestors :self, assets_host
+  # p.frame_ancestors :none
   p.font_src        :self, assets_host
   p.img_src         :self, :https, :data, :blob, assets_host
   p.style_src       :self, :unsafe_inline, assets_host
   p.media_src       :self, :https, :data, assets_host
-  p.frame_src       :self, :https
+  # p.frame_src       :self, :https
   p.manifest_src    :self, assets_host
 
   if Rails.env.development?
