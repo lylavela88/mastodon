@@ -118,11 +118,11 @@ en_GB:
         must_be_following_dm: Block direct messages from people you don't follow
       notification_emails:
         digest: Send digest e-mails
-        favourite: Send e-mail when someone favourites your status
+        favourite: Send e-mail when someone likes your status
         follow: Send e-mail when someone follows you
         follow_request: Send e-mail when someone requests to follow you
         mention: Send e-mail when someone mentions you
-        reblog: Send e-mail when someone boosts your status
+        reblog: Send e-mail when someone prays for you
         report: Send e-mail when a new report is submitted
     'no': 'No'
     required:
