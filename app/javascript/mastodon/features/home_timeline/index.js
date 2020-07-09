@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { expandHomeTimeline } from '../../actions/timelines';
+import { updateAllStatuses } from '../../actions/statuses';
 import PropTypes from 'prop-types';
 import StatusListContainer from '../ui/containers/status_list_container';
 import Column from '../../components/column';
@@ -62,6 +63,7 @@ class HomeTimeline extends React.PureComponent {
 
   componentDidMount () {
     this._checkIfReloadNeeded(false, this.props.isPartial);
+    this.props.dispatch(updateAllStatuses());
   }
 
   componentDidUpdate (prevProps) {
@@ -71,10 +73,9 @@ class HomeTimeline extends React.PureComponent {
   componentWillUnmount () {
     this._stopPolling();
   }
-
+  
   _checkIfReloadNeeded (wasPartial, isPartial) {
     const { dispatch } = this.props;
-
     if (wasPartial === isPartial) {
       return;
     } else if (!wasPartial && isPartial) {

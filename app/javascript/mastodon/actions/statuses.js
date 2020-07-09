@@ -1,9 +1,9 @@
 import api from '../api';
 import openDB from '../storage/db';
 import { evictStatus } from '../storage/modifier';
-
+import axios from 'axios';
 import { deleteFromTimelines } from './timelines';
-import { importFetchedStatus, importFetchedStatuses, importAccount, importStatus } from './importer';
+import { importFetchedStatus, importFetchedStatuses, importAccount, importStatus, importStatuses } from './importer';
 import { ensureComposeIsVisible } from './compose';
 
 export const STATUS_FETCH_REQUEST = 'STATUS_FETCH_REQUEST';
@@ -154,6 +154,7 @@ export function deleteStatus(id, routerHistory, withRedraft = false) {
       evictStatus(id);
       dispatch(deleteStatusSuccess(id));
       dispatch(deleteFromTimelines(id));
+      dispatch(updateAllStatuses());
 
       if (withRedraft) {
         dispatch(redraft(status, response.data.text));
@@ -202,6 +203,25 @@ export function fetchContext(id) {
 
       dispatch(fetchContextFail(id, error));
     });
+  };
+};
+
+export function updateAllStatuses() {
+  return (dispatch, getState) => {
+    let imStats = getState().get('statuses').toJS();
+    let statuses = [];
+    for(let key in imStats) {
+      statuses = [...statuses, { ...imStats[key], ...{ id: key } } ];
+    }
+    axios.all(statuses.map(status=>{
+      return api(getState).get(`/api/v1/statuses/${status.id}/context`);
+    })).then( res=>{
+      statuses = statuses.map((d, i)=>{
+        return { ...d, ...res[i].data, ...{ replies_count: res[i].data.descendants.length } };
+      });
+      dispatch(importStatuses(statuses));
+    }).catch(error=>{
+    });  
   };
 };
 

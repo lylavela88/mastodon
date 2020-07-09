@@ -1,5 +1,7 @@
 import api from '../api';
 import { importFetchedAccounts, importFetchedStatus } from './importer';
+import { updateAllStatuses } from './statuses';
+import axios from 'axios';
 
 export const REBLOG_REQUEST = 'REBLOG_REQUEST';
 export const REBLOG_SUCCESS = 'REBLOG_SUCCESS';
@@ -37,11 +39,13 @@ export function reblog(status) {
   return function (dispatch, getState) {
     dispatch(reblogRequest(status));
 
-    api(getState).post(`/api/v1/statuses/${status.get('id')}/reblog`).then(function (response) {
-      // The reblog API method returns a new status wrapped around the original. In this case we are only
-      // interested in how the original is modified, hence passing it skipping the wrapper
-      dispatch(importFetchedStatus(response.data.reblog));
+    axios.all(
+      [api(getState).post(`/api/v1/statuses/${status.get('id')}/reblog`),
+        api(getState).get(`/api/v1/statuses/${status.get('id')}/context`)]
+    ).then(function (response) {
+      dispatch(importFetchedStatus({ ...response[0].data.reblog, ...response[1].data }));
       dispatch(reblogSuccess(status));
+      dispatch(updateAllStatuses());
     }).catch(function (error) {
       dispatch(reblogFail(status, error));
     });
@@ -52,9 +56,13 @@ export function unreblog(status) {
   return (dispatch, getState) => {
     dispatch(unreblogRequest(status));
 
-    api(getState).post(`/api/v1/statuses/${status.get('id')}/unreblog`).then(response => {
-      dispatch(importFetchedStatus(response.data));
+    axios.all(
+      [api(getState).post(`/api/v1/statuses/${status.get('id')}/unreblog`),
+        api(getState).get(`/api/v1/statuses/${status.get('id')}/context`)]
+    ).then(function (response) {
+      dispatch(importFetchedStatus({ ...response[0].data, ...response[1].data }));
       dispatch(unreblogSuccess(status));
+      dispatch(updateAllStatuses());
     }).catch(error => {
       dispatch(unreblogFail(status, error));
     });
@@ -115,8 +123,11 @@ export function favourite(status) {
   return function (dispatch, getState) {
     dispatch(favouriteRequest(status));
 
-    api(getState).post(`/api/v1/statuses/${status.get('id')}/favourite`).then(function (response) {
-      dispatch(importFetchedStatus(response.data));
+    axios.all(
+      [api(getState).post(`/api/v1/statuses/${status.get('id')}/favourite`),
+        api(getState).get(`/api/v1/statuses/${status.get('id')}/context`)]
+    ).then(function (response) {
+      dispatch(importFetchedStatus({ ...response[0].data, ...response[1].data }));
       dispatch(favouriteSuccess(status));
     }).catch(function (error) {
       dispatch(favouriteFail(status, error));
@@ -128,8 +139,11 @@ export function unfavourite(status) {
   return (dispatch, getState) => {
     dispatch(unfavouriteRequest(status));
 
-    api(getState).post(`/api/v1/statuses/${status.get('id')}/unfavourite`).then(response => {
-      dispatch(importFetchedStatus(response.data));
+    axios.all(
+      [api(getState).post(`/api/v1/statuses/${status.get('id')}/unfavourite`),
+        api(getState).get(`/api/v1/statuses/${status.get('id')}/context`)]
+    ).then(function (response) {
+      dispatch(importFetchedStatus({ ...response[0].data, ...response[1].data }));
       dispatch(unfavouriteSuccess(status));
     }).catch(error => {
       dispatch(unfavouriteFail(status, error));

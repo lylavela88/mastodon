@@ -10,7 +10,9 @@ import {
   insertEmojiCompose,
   uploadCompose,
 } from '../../../actions/compose';
-
+import {
+  expandHomeTimeline
+} from '../../../actions/timelines';
 const mapStateToProps = state => ({
   text: state.getIn(['compose', 'text']),
   suggestions: state.getIn(['compose', 'suggestions']),

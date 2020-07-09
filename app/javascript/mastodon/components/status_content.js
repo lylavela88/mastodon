@@ -228,6 +228,7 @@ export default class StatusContent extends React.PureComponent {
       const output = [
         <div
           tabIndex='0'
+          key='content'
           ref={this.setRef}
           className='status__content'
           style={directionStyle}
