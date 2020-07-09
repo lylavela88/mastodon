@@ -44,9 +44,11 @@ const messages = defineMessages({
 const makeMapStateToProps = () => {
   const getStatus = makeGetStatus();
 
-  const mapStateToProps = (state, props) => ({
-    status: getStatus(state, props),
-  });
+  const mapStateToProps = (state, props) => {
+    return {
+      status: getStatus(state, props),
+    };
+  };
 
   return mapStateToProps;
 };

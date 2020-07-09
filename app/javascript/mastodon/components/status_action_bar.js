@@ -3,7 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import IconButton from './icon_button';
 import DropdownMenuContainer from '../containers/dropdown_menu_container';
-import { defineMessages, injectIntl } from 'react-intl';
+import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { me, isStaff } from '../initial_state';
 
@@ -68,6 +68,9 @@ class StatusActionBar extends ImmutablePureComponent {
     onPin: PropTypes.func,
     withDismiss: PropTypes.bool,
     intl: PropTypes.object.isRequired,
+    isOrigin: PropTypes.bool,
+    isExpandable: PropTypes.bool,
+    onExpand: PropTypes.func,
   };
 
   // Avoid checking props that are functions (and whose equality will always
@@ -176,9 +179,11 @@ class StatusActionBar extends ImmutablePureComponent {
       document.body.removeChild(textarea);
     }
   }
-
+  shouldComponentUpdate(nextProps) {
+    return true;
+  }
   render () {
-    const { status, intl, withDismiss } = this.props;
+    let { status, intl, withDismiss, isOrigin, isExpandable, onExpand } = this.props;
 
     const mutingConversation = status.get('muted');
     const anonymousAccess    = !me;
@@ -249,9 +254,15 @@ class StatusActionBar extends ImmutablePureComponent {
 
     return (
       <div className='status__action-bar'>
-        <IconButton className='status__action-bar-button star-icon' animate active={status.get('favourited')} pressed={status.get('favourited')} title={intl.formatMessage(messages.favourite)} icon='heart' onClick={this.handleFavouriteClick} />
-        <div className='status__action-bar__counter'><IconButton className='status__action-bar-button' title={replyTitle} icon={status.get('in_reply_to_account_id') === status.getIn(['account', 'id']) ? 'reply' : replyIcon} onClick={this.handleReplyClick} /><span className='status__action-bar__counter__label' >{obfuscatedCount(status.get('replies_count'))}</span></div>
-        <IconButton className='status__action-bar-button' disabled={!publicStatus} active={status.get('reblogged')} pressed={status.get('reblogged')} title='Praying' icon={reblogIcon} onClick={this.handleReblogClick} />
+        <div className='status__action-bar__counter'>
+          <IconButton className='status__action-bar-button star-icon' animate active={status.get('favourited')} pressed={status.get('favourited')} title={intl.formatMessage(messages.favourite)} icon='heart' onClick={this.handleFavouriteClick} />
+          <span className='status__action-bar__counter__label' >{status.get('favourites_count')}</span>
+        </div>
+        <div className='status__action-bar__counter'><IconButton className='status__action-bar-button' title={replyTitle} icon={status.get('in_reply_to_account_id') === status.getIn(['account', 'id']) ? 'reply' : replyIcon} onClick={this.handleReplyClick} /><span className='status__action-bar__counter__label' >{status.get('replies_count')}</span></div>
+        <div className='status__action-bar__counter'>
+          <IconButton className='status__action-bar-button' disabled={!publicStatus} active={status.get('reblogged')} pressed={status.get('reblogged')} title='Praying' icon={reblogIcon} onClick={this.handleReblogClick} />
+          <span className='status__action-bar__counter__label' >{status.get('reblogs_count')}</span>
+        </div>
         {/* <IconButton className='status__action-bar-button' disabled={!publicStatus} active={status.get('reblogged')} pressed={status.get('reblogged')} title={!publicStatus ? intl.formatMessage(messages.cannot_reblog) : intl.formatMessage(messages.reblog)} icon={reblogIcon} onClick={this.handleReblogClick} /> */}
         {/* <IconButton className='status__action-bar-button star-icon' animate active={status.get('favourited')} pressed={status.get('favourited')} title={intl.formatMessage(messages.favourite)} icon='star' onClick={this.handleFavouriteClick} /> */}
         {shareButton}
@@ -259,6 +270,13 @@ class StatusActionBar extends ImmutablePureComponent {
         <div className='status__action-bar-dropdown'>
           <DropdownMenuContainer disabled={anonymousAccess} status={status} items={menu} icon='ellipsis-h' size={18} direction='right' title={intl.formatMessage(messages.more)} />
         </div>
+        {
+          isOrigin && isExpandable &&
+          <button className='status__replies__read-more-button' onClick={onExpand}>
+            Show more
+          </button>
+        }
+
       </div>
     );
   }

@@ -77,7 +77,7 @@ export default class ScrollableList extends PureComponent {
   scrollToTopOnMouseIdle = false;
 
   setScrollTop = newScrollTop => {
-    if (this.node.scrollTop !== newScrollTop) {
+    if (this.node && this.node.scrollTop !== newScrollTop) {
       this.lastScrollWasSynthetic = true;
       this.node.scrollTop = newScrollTop;
     }

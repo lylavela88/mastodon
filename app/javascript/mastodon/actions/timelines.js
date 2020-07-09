@@ -1,6 +1,7 @@
 import { importFetchedStatus, importFetchedStatuses } from './importer';
 import api, { getLinks } from '../api';
 import { Map as ImmutableMap, List as ImmutableList } from 'immutable';
+import axios from 'axios';
 
 export const TIMELINE_UPDATE  = 'TIMELINE_UPDATE';
 export const TIMELINE_DELETE  = 'TIMELINE_DELETE';
@@ -76,14 +77,26 @@ export function expandTimeline(timelineId, path, params = {}, done = noOp) {
     }
 
     const isLoadingRecent = !!params.since_id;
-
+    
     dispatch(expandTimelineRequest(timelineId, isLoadingMore));
 
-    api(getState).get(path, { params }).then(response => {
-      const next = getLinks(response).refs.find(link => link.rel === 'next');
-      dispatch(importFetchedStatuses(response.data));
-      dispatch(expandTimelineSuccess(timelineId, response.data, next ? next.uri : null, response.code === 206, isLoadingRecent, isLoadingMore));
-      done();
+    api(getState).get(path, { params }).then( response => {
+
+      axios.all(response.data.map(d=>{
+        return api(getState).get(`/api/v1/statuses/${d.id}/context`);
+      })).then(res=>{
+        response.data = response.data.map((d, i)=>{
+          return { ...d, ...res[i].data };
+        });
+        const next = getLinks(response).refs.find(link => link.rel === 'next');
+        dispatch(importFetchedStatuses(response.data));
+        dispatch(expandTimelineSuccess(timelineId, response.data, next ? next.uri : null, response.code === 206, isLoadingRecent, isLoadingMore));
+        done();
+      }).catch(error=>{
+        dispatch(expandTimelineFail(timelineId, error, isLoadingMore));
+        done();
+      });  
+
     }).catch(error => {
       dispatch(expandTimelineFail(timelineId, error, isLoadingMore));
       done();

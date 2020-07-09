@@ -1,1 +1,17 @@
 @import 'application';
+.status__all__wrapper {
+    border-bottom: 1px solid lighten($ui-base-color, 8%);
+}
+.status__replies__wrapper {
+    background-color: #2c2e3896;
+    padding-left: 60px;
+}
+
+.status__replies__read-more-button{
+    font-size: 15px;
+    line-height: 20px;
+    color: #1fd9b2;
+    border: 0;
+    background: transparent;
+    margin-left: auto;
+}

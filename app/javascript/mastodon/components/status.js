@@ -86,6 +86,7 @@ class Status extends ImmutablePureComponent {
     updateScrollBottom: PropTypes.func,
     cacheMediaWidth: PropTypes.func,
     cachedMediaWidth: PropTypes.number,
+    isOrigin: PropTypes.bool,
   };
 
   // Avoid checking props that are functions (and whose equality will always
@@ -129,7 +130,6 @@ class Status extends ImmutablePureComponent {
   // Compensate height changes
   componentDidUpdate (prevProps, prevState, snapshot) {
     const doShowCard  = !this.props.muted && !this.props.hidden && this.props.status && this.props.status.get('card');
-
     if (doShowCard && !this.didShowCard) {
       this.didShowCard = true;
 
@@ -266,13 +266,15 @@ class Status extends ImmutablePureComponent {
     this.node = c;
   }
 
+  shouldComponentUpdate(nextProps) {
+    return true;
+  }
   render () {
     let media = null;
     let statusAvatar, prepend, rebloggedByText;
 
     const { intl, hidden, featured, otherAccounts, unread, showThread } = this.props;
-
-    let { status, account, ...other } = this.props;
+    let { status, account, isOrigin,  ...other } = this.props;
 
     if (status === null) {
       return null;
@@ -426,7 +428,7 @@ class Status extends ImmutablePureComponent {
               </a>
             </div>
 
-            <StatusContent status={status} onClick={this.handleClick} expanded={!status.get('hidden')} onExpandedToggle={this.handleExpandedToggle} collapsable />
+            <StatusContent onClick={isOrigin && this.handleClick} status={status} expanded={!status.get('hidden')} onExpandedToggle={this.handleExpandedToggle} collapsable />
 
             {media}
 
@@ -436,7 +438,7 @@ class Status extends ImmutablePureComponent {
               </button>
             )}
 
-            <StatusActionBar status={status} account={account} {...other} />
+            <StatusActionBar status={status} account={account} isOrigin={isOrigin} {...other} />
           </div>
         </div>
       </HotKeys>
