@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import StatusListContainer from '../ui/containers/status_list_container';
+import { updateAllStatuses } from '../../actions/statuses';
 import Column from '../../components/column';
 import ColumnHeader from '../../components/column_header';
 import { expandPublicTimeline } from '../../actions/timelines';
@@ -68,9 +69,9 @@ class PublicTimeline extends React.PureComponent {
 
   componentDidMount () {
     const { dispatch, onlyMedia } = this.props;
-
     dispatch(expandPublicTimeline({ onlyMedia }));
     this.disconnect = dispatch(connectPublicStream({ onlyMedia }));
+    this.props.dispatch(updateAllStatuses());
   }
 
   componentDidUpdate (prevProps) {

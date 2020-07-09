@@ -17,7 +17,7 @@ class Api::V1::Statuses::FavouritesController < Api::BaseController
     @status = requested_status
     @favourites_map = { @status.id => false }
 
-    UnfavouriteWorker.perform_async(current_user.account_id, @status.id)
+    UnfavouriteWorker.new.perform(current_user.account_id, @status.id)
 
     render json: @status, serializer: REST::StatusSerializer, relationships: StatusRelationshipsPresenter.new([@status], current_user&.account_id, favourites_map: @favourites_map)
   end
