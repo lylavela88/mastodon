@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import StatusList from '../../../components/status_list';
+import StatusRepliesList from '../../../components/status_replies_list';
 import { scrollTopTimeline } from '../../../actions/timelines';
 import { Map as ImmutableMap, List as ImmutableList } from 'immutable';
 import { createSelector } from 'reselect';
@@ -34,6 +34,7 @@ const makeMapStateToProps = () => {
 
   const mapStateToProps = (state, { timelineId }) => ({
     statusIds: getStatusIds(state, { type: timelineId }),
+    statuses: state.get('statuses'),
     isLoading: state.getIn(['timelines', timelineId, 'isLoading'], true),
     isPartial: state.getIn(['timelines', timelineId, 'isPartial'], false),
     hasMore:   state.getIn(['timelines', timelineId, 'hasMore']),
@@ -54,4 +55,4 @@ const mapDispatchToProps = (dispatch, { timelineId }) => ({
 
 });
 
-export default connect(makeMapStateToProps, mapDispatchToProps)(StatusList);
+export default connect(makeMapStateToProps, mapDispatchToProps)(StatusRepliesList);

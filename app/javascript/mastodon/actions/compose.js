@@ -10,6 +10,7 @@ import { updateTimeline } from './timelines';
 import { showAlertForError } from './alerts';
 import { showAlert } from './alerts';
 import { defineMessages } from 'react-intl';
+import { updateAllStatuses } from './statuses';
 
 let cancelFetchComposeSuggestionsAccounts;
 
@@ -85,7 +86,7 @@ export function replyCompose(status, routerHistory) {
       status: status,
     });
 
-    ensureComposeIsVisible(getState, routerHistory);
+    ensureComposeIsVisible(getState, routerHistory);    
   };
 };
 
@@ -147,14 +148,15 @@ export function submitCompose(routerHistory) {
         'Idempotency-Key': getState().getIn(['compose', 'idempotencyKey']),
       },
     }).then(function (response) {
+
       if (response.data.visibility === 'direct' && getState().getIn(['conversations', 'mounted']) <= 0 && routerHistory) {
         routerHistory.push('/timelines/direct');
       } else if (routerHistory && routerHistory.location.pathname === '/statuses/new' && window.history.state) {
         routerHistory.goBack();
       }
-
       dispatch(insertIntoTagHistory(response.data.tags, status));
       dispatch(submitComposeSuccess({ ...response.data }));
+      dispatch(updateAllStatuses());
 
       // To make the app more responsive, immediately push the status
       // into the columns
