@@ -58,7 +58,7 @@ class Rack::Attack
   # end
   
   #e.g. 07/13/2020
-  throttle('throttle_authenticated_api', limit: 600, period: 3.minutes) do |req|
+  throttle('throttle_authenticated_api', limit: 1000, period: 3.minutes) do |req|
     req.authenticated_user_id if req.api_request?
   end
 
@@ -84,7 +84,7 @@ class Rack::Attack
   # throttle('throttle_authenticated_paging', limit: 300, period: 15.minutes) do |req|
   #   req.authenticated_user_id if req.paging_request?
   # end
-  
+
   #eg 07.13.2020
   throttle('throttle_authenticated_paging', limit: 700, period: 10.minutes) do |req|
     req.authenticated_user_id if req.paging_request?
