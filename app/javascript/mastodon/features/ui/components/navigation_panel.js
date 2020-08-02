@@ -17,6 +17,7 @@ const NavigationPanel = () => (
     <NavLink className='column-link column-link--transparent' to='/timelines/direct'><Icon className='column-link__icon' id='envelope' fixedWidth /><FormattedMessage id='navigation_bar.direct' defaultMessage='Direct messages' /></NavLink>
     {/* <NavLink className='column-link column-link--transparent' to='/favourites'><Icon className='column-link__icon' id='star' fixedWidth /><FormattedMessage id='navigation_bar.favourites' defaultMessage='Favourites' /></NavLink> */}
     <NavLink className='column-link column-link--transparent' to='/favourites'><Icon className='column-link__icon' id='heart' fixedWidth />My Likes</NavLink>
+    <a className='column-link column-link--transparent' href='https://dingdash.com/dingdocs.html'><Icon className='column-link__icon' id='question' fixedWidth />Help Documentation</a>
     <NavLink className='column-link column-link--transparent' to='/lists'><Icon className='column-link__icon' id='list-ul' fixedWidth /><FormattedMessage id='navigation_bar.lists' defaultMessage='Lists' /></NavLink>
 
     <ListPanel />
