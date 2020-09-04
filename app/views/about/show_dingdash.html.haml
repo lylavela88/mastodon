@@ -135,22 +135,20 @@
             .media-wrap
               %a{:href => "http://dingdash.com"}
                 %img{:src => "btj_styles/logoBTJ.png"}/
-          .col-12.col-md-2.mbr-fonts-style.display-7
-            %h5.pb-3
-              Address
+          -# .col-12.col-md-2.mbr-fonts-style.display-7
+            -# %h5.pb-3
+            -#   Address
+            -# %p.mbr-text
+            -#   7777 The Way Avenue
+            -#   = succeed "Shiloh," do
+            -#     %br/
+          .col-12.col-md-4.mbr-fonts-style.display-7
+            -# %h5.pb-3
+            -#   Contacts
             %p.mbr-text
-              7777 The Way Avenue
-              = succeed "Shiloh," do
-                %br/
-          .col-12.col-md-2.mbr-fonts-style.display-7
-            %h5.pb-3
-              Contacts
-            %p.mbr-text
-              Email: support@dingdash.com
-              = succeed "Phone:" do
-                %br/
-              = succeed "Fax:" do
-                %br/
+              %a{:href => "mailto:dingdash@backtojerusalem.com"} Email Us
+
+              
         .footer-lower
           .media-container-row
             .col-sm-12
