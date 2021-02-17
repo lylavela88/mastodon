@@ -11,8 +11,8 @@ import Avatar from 'mastodon/components/avatar';
 import { shortNumberFormat } from 'mastodon/utils/numbers';
 import { NavLink } from 'react-router-dom';
 import DropdownMenuContainer from 'mastodon/containers/dropdown_menu_container';
-import {GiNinjaHead, GiCricket} from 'react-icons/gi/index';
-import {GrStar} from 'react-icons/gr/index';
+import {GiNinjaHead, GiCricket} from 'react-icons/gi';
+import {GrStar} from 'react-icons/gr';
 import { IconContext } from "react-icons";
 
 

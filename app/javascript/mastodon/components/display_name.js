@@ -1,8 +1,8 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import {GiNinjaHead, GiCricket} from 'react-icons/gi/index';
-import {GrStar} from 'react-icons/gr/index';
+import {GiNinjaHead, GiCricket} from 'react-icons/gi';
+import {GrStar} from 'react-icons/gr';
 import { IconContext } from "react-icons";
 
 export default class DisplayName extends React.PureComponent {
