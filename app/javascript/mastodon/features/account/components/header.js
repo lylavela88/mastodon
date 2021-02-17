@@ -11,6 +11,10 @@ import Avatar from 'mastodon/components/avatar';
 import { shortNumberFormat } from 'mastodon/utils/numbers';
 import { NavLink } from 'react-router-dom';
 import DropdownMenuContainer from 'mastodon/containers/dropdown_menu_container';
+import {GiNinjaHead, GiCricket} from 'react-icons/gi';
+import {GrStar} from 'react-icons/gr';
+import { IconContext } from "react-icons";
+
 
 const messages = defineMessages({
   unfollow: { id: 'account.unfollow', defaultMessage: 'Unfollow' },
@@ -45,6 +49,7 @@ const messages = defineMessages({
   add_or_remove_from_list: { id: 'account.add_or_remove_from_list', defaultMessage: 'Add or Remove from lists' },
   admin_account: { id: 'status.admin_account', defaultMessage: 'Open moderation interface for @{name}' },
 });
+
 
 const dateFormatOptions = {
   month: 'short',
@@ -192,11 +197,28 @@ class Header extends ImmutablePureComponent {
       menu.push(null);
       menu.push({ text: intl.formatMessage(messages.admin_account, { name: account.get('username') }), href: `/admin/accounts/${account.get('id')}` });
     }
+    //eg add 02.16.2021    
+    const dingCount       = parseInt(account.get('statuses_count'));  
+    const rewardIcon      = dingCount >= 1000 ? <GiNinjaHead /> : dingCount >= 500 ? <GrStar  /> : dingCount >= 100 ? <GiCricket /> : null;
+    const rewardMessage      = dingCount >= 1000 ? "Ninja (1000+ Dings)"  
+                              : dingCount >= 500 ? "Superstar (500+ Dings)" 
+                              : dingCount >= 100 ? "Grasshopper (100+ Dings)"  : null;
+    const rewardBadge     = rewardIcon != null ? 
+                              (
+                                <IconContext.Provider value={{ color: "#1ab595", size: "1.5em"}}>
+                                    <span style={{position: "absolute", paddingLeft: "5px"}} 
+                                          title={rewardMessage}>
+                                      {rewardIcon}
+                                    </span>
+                                  </IconContext.Provider>
+                              ) : null;
+    //eg add 02.16.2021
 
     const content         = { __html: account.get('note_emojified') };
     const displayNameHtml = { __html: account.get('display_name_html') };
     const fields          = account.get('fields');
     const badge           = account.get('bot') ? (<div className='account-role bot'><FormattedMessage id='account.badges.bot' defaultMessage='Bot' /></div>) : null;
+
     const acct            = account.get('acct').indexOf('@') === -1 && domain ? `${account.get('acct')}@${domain}` : account.get('acct');
 
     return (
@@ -226,9 +248,10 @@ class Header extends ImmutablePureComponent {
 
           <div className='account__header__tabs__name'>
             <h1>
-              <span dangerouslySetInnerHTML={displayNameHtml} /> {badge}
+              <span dangerouslySetInnerHTML={displayNameHtml} /> {badge} {rewardBadge}
               <small>@{acct} {lockedIcon}</small>
             </h1>
+            
           </div>
 
           <div className='account__header__extra'>

@@ -18,6 +18,7 @@ import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
 import { displayMedia } from '../initial_state';
 
+
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
 import Bundle from '../features/ui/components/bundle';
@@ -272,6 +273,7 @@ class Status extends ImmutablePureComponent {
   render () {
     let media = null;
     let statusAvatar, prepend, rebloggedByText;
+     
 
     const { intl, hidden, featured, otherAccounts, unread, showThread } = this.props;
     let { status, account, isOrigin,  ...other } = this.props;
@@ -408,7 +410,11 @@ class Status extends ImmutablePureComponent {
       toggleHidden: this.handleHotkeyToggleHidden,
       toggleSensitive: this.handleHotkeyToggleSensitive,
     };
-
+    //02.17.2021 - pass dings to display name to show reward badge.
+      let dings = 0;
+      if (this.props && this.props.statuses)
+        dings = parseInt(this.props.statuses.size);
+    
     return (
       <HotKeys handlers={handlers}>
         <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
@@ -423,9 +429,10 @@ class Status extends ImmutablePureComponent {
                 <div className='status__avatar'>
                   {statusAvatar}
                 </div>
-
-                <DisplayName account={status.get('account')} others={otherAccounts} />
+               <DisplayName totalDings={dings} account={status.get('account')} others={otherAccounts} /> 
+               
               </a>
+             
             </div>
 
             <StatusContent onClick={isOrigin && this.handleClick} status={status} expanded={!status.get('hidden')} onExpandedToggle={this.handleExpandedToggle} collapsable />
