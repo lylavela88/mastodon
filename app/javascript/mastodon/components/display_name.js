@@ -2,7 +2,7 @@ import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import {GiNinjaHead, GiCricket} from 'react-icons/gi/index';
-import {GrStar} from 'react-icons/lib/';
+import {GrStar} from 'react-icons/gr/index';
 import { IconContext } from "react-icons";
 
 export default class DisplayName extends React.PureComponent {
@@ -34,9 +34,8 @@ export default class DisplayName extends React.PureComponent {
       }
         
       let acct = account.get('acct');     
-       //eg add 02.16.2021   
-       console.log('totalDings', totalDings);
-       rewardIcon      = totalDings >= 1000 ? <GiNinjaHead /> : totalDings >= 500 ? <GrStar  /> : totalDings >= 100 ? <GiCricket /> : null;
+       //eg add 02.16.2021          
+       rewardIcon      = totalDings >= 15 ? <GiNinjaHead /> : totalDings >= 10 ? <GrStar  /> : totalDings >= 5 ? <GiCricket /> : null;
        rewardMessage   = totalDings >= 1000 ? "Ninja (1000+ Dings)"  
                             : totalDings >= 500 ? "Superstar (500+ Dings)" 
                             : totalDings >= 100 ? "Grasshopper (100+ Dings)"  : null;

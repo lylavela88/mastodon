@@ -87,6 +87,7 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
   },
 
   onFavourite (status) {
+    console.log('fabv', status);
     if (status.get('favourited')) {
       dispatch(unfavourite(status));
     } else {
