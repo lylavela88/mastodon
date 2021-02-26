@@ -200,7 +200,7 @@ class Header extends ImmutablePureComponent {
     const dingCount       = parseInt(account.get('statuses_count'));  
     const rewardIcon      = dingCount >= 1000 ? <GiNinjaHead /> : dingCount >= 500 ? <GiNinjaStar  /> : dingCount >= 100 ? <GiCricket /> : null;
     const rewardMessage      = dingCount >= 1000 ? "Ninja (1000+ Dings)"  
-                              : dingCount >= 500 ? "Superstar (500+ Dings)" 
+                              : dingCount >= 500 ? "Ninja Star (500+ Dings)" 
                               : dingCount >= 100 ? "Grasshopper (100+ Dings)"  : null;
     const rewardBadge     = rewardIcon != null ? 
                               (
