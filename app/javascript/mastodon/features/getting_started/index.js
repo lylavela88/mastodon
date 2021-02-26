@@ -17,7 +17,7 @@ import LinkFooter from 'mastodon/features/ui/components/link_footer';
 const messages = defineMessages({
   home_timeline: { id: 'tabs_bar.home', defaultMessage: 'Home' },
   notifications: { id: 'tabs_bar.notifications', defaultMessage: 'Notifications' },
-  public_timeline: { id: 'navigation_bar.public_timeline', defaultMessage: 'Federated timeline' },
+  public_timeline: { id: 'navigation_bar.public_timeline', defaultMessage: 'Explore Universe' },
   settings_subheading: { id: 'column_subheading.settings', defaultMessage: 'Settings' },
   community_timeline: { id: 'navigation_bar.community_timeline', defaultMessage: 'Local timeline' },
   direct: { id: 'navigation_bar.direct', defaultMessage: 'Direct messages' },

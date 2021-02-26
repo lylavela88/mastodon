@@ -40,7 +40,6 @@ const messages = defineMessages({
   replyMessage: { id: 'confirmations.reply.message', defaultMessage: 'Replying now will overwrite the message you are currently composing. Are you sure you want to proceed?' },
   blockAndReport: { id: 'confirmations.block.block_and_report', defaultMessage: 'Block & Report' },
 });
-
 const makeMapStateToProps = () => {
   const getStatus = makeGetStatus();
 
@@ -87,7 +86,6 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
   },
 
   onFavourite (status) {
-    console.log('fabv', status);
     if (status.get('favourited')) {
       dispatch(unfavourite(status));
     } else {
@@ -175,7 +173,7 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
       dispatch(hideStatus(status.get('id')));
     }
   },
-
+dispatch
 });
 
 export default injectIntl(connect(makeMapStateToProps, mapDispatchToProps)(Status));

@@ -1153,7 +1153,7 @@
         "id": "tabs_bar.notifications"
       },
       {
-        "defaultMessage": "Federated timeline",
+        "defaultMessage": "Exploration timeline",
         "id": "navigation_bar.public_timeline"
       },
       {
@@ -1290,7 +1290,7 @@
         "id": "tabs_bar.notifications"
       },
       {
-        "defaultMessage": "Federated timeline",
+        "defaultMessage": "Exploration timeline",
         "id": "navigation_bar.public_timeline"
       },
       {
@@ -1912,7 +1912,7 @@
   {
     "descriptors": [
       {
-        "defaultMessage": "Federated timeline",
+        "defaultMessage": "Explore Universe",
         "id": "column.public"
       },
       {
