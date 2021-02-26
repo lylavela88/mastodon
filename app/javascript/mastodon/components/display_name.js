@@ -48,7 +48,7 @@ export default class DisplayName extends React.PureComponent {
                                   </span>
                                 </IconContext.Provider>
                             ) : null;
-  //eg add 02.16.2021
+  //eg add 02.16.2021 {rewardBadge} 
 
       if (acct.indexOf('@') === -1 && localDomain) {
         acct = `${acct}@${localDomain}`;
@@ -60,7 +60,7 @@ export default class DisplayName extends React.PureComponent {
 
     return (
       <span className='display-name'>
-        {displayName} {suffix} {rewardBadge} 
+        {displayName} {suffix} 
       </span>
     );
   }
