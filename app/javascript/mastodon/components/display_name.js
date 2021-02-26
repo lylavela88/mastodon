@@ -34,9 +34,9 @@ export default class DisplayName extends React.PureComponent {
         
       let acct = account.get('acct');     
        //eg add 02.16.2021          
-       rewardIcon      = totalDings >= 1000 ? <GiNinjaHead /> : totalDings >= 500 ? <GiNinjaStar  /> : totalDings >= 100 ? <GiCricket /> : null;
+       rewardIcon      = totalDings >= 1000 ? <GiNinjaHead /> : totalDings >= 20 ? <GiNinjaStar  /> : totalDings >= 100 ? <GiCricket /> : null;
        rewardMessage   = totalDings >= 1000 ? "Ninja (1000+ Dings)"  
-                            : totalDings >= 500 ? "Superstar (500+ Dings)" 
+                            : totalDings >= 500 ? "Ninja Star (500+ Dings)" 
                             : totalDings >= 100 ? "Grasshopper (100+ Dings)"  : null;
        rewardBadge     = rewardIcon != null ? 
                             (
@@ -47,7 +47,7 @@ export default class DisplayName extends React.PureComponent {
                                   </span>
                                 </IconContext.Provider>
                             ) : null;
-  //eg add 02.16.2021 {rewardBadge} 
+  //eg add 02.16.2021 
 
       if (acct.indexOf('@') === -1 && localDomain) {
         acct = `${acct}@${localDomain}`;
@@ -59,7 +59,7 @@ export default class DisplayName extends React.PureComponent {
 
     return (
       <span className='display-name'>
-        {displayName} {suffix} 
+        {displayName} {suffix} {rewardBadge} 
       </span>
     );
   }

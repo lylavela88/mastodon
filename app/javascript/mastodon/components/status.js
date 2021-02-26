@@ -430,6 +430,7 @@ class Status extends ImmutablePureComponent {
   
     let dings = 0;
     console.log('really', localStorage.getItem("statuses_Count"));
+    
     if (localStorage.getItem("statuses_Count"))
       dings = parseInt(localStorage.getItem("statuses_Count"));
 
