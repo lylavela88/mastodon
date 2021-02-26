@@ -91,6 +91,33 @@ function getFromDB(dispatch, getState, index, id) {
     };
   });
 }
+//add - EG 02.25.2021
+export function fetchStatusCount(id) {
+  return (dispatch, getState) => {
+    dispatch(fetchRelationships([id]));
+    dispatch(fetchAccountRequest(id));
+    openDB().then(db => getFromDB(
+      dispatch,
+      getState,
+      db.transaction('accounts', 'read').objectStore('accounts').index('id'),
+      id
+    ).then(() => db.close(), error => {
+      db.close();
+      throw error;
+    })).catch(() => {
+      api(getState).get(`/api/v1/accounts/${id}`).then(response => {
+        //EG 02.26.2021 I know there is a much better way to pass this data to status.js, but I'm not yet familiar with react and it's getting late :(.
+        localStorage.setItem("statuses_Count", response.data.statuses_count);
+      //  dispatch(importFetchedAccount(response.data));
+    })
+  }
+    ).then(() => {
+      dispatch(fetchAccountSuccess());
+    }).catch(error => {
+      dispatch(fetchAccountFail(id, error));
+    });
+  };
+};
 
 export function fetchAccount(id) {
   return (dispatch, getState) => {

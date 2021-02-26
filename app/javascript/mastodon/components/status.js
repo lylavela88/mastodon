@@ -1,4 +1,5 @@
 import React from 'react';
+import api from '../api';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import Avatar from './avatar';
@@ -17,7 +18,10 @@ import { HotKeys } from 'react-hotkeys';
 import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
 import { displayMedia } from '../initial_state';
-
+import {
+  fetchStatusCount,
+  fetchAccount
+} from '../actions/accounts';
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
@@ -88,6 +92,8 @@ class Status extends ImmutablePureComponent {
     cacheMediaWidth: PropTypes.func,
     cachedMediaWidth: PropTypes.number,
     isOrigin: PropTypes.bool,
+    statusCount: PropTypes.number,
+    dispatch: PropTypes.func
   };
 
   // Avoid checking props that are functions (and whose equality will always
@@ -102,11 +108,15 @@ class Status extends ImmutablePureComponent {
   state = {
     showMedia: defaultMediaVisibility(this.props.status),
     statusId: undefined,
+    statuses_Count: 0
   };
 
   // Track height changes we know about to compensate scrolling
-  componentDidMount () {
-    this.didShowCard = !this.props.muted && !this.props.hidden && this.props.status && this.props.status.get('card');
+  componentDidMount () {  
+    let status_Count = 0;
+    localStorage.removeItem("statuses_Count");
+    this.didShowCard = !this.props.muted && !this.props.hidden && this.props.status && this.props.status.get('card'); 
+    this.props.dispatch(fetchStatusCount(this.props.status.getIn(['account', 'id'])));
   }
 
   getSnapshotBeforeUpdate () {
@@ -278,6 +288,7 @@ class Status extends ImmutablePureComponent {
     const { intl, hidden, featured, otherAccounts, unread, showThread } = this.props;
     let { status, account, isOrigin,  ...other } = this.props;
 
+
     if (status === null) {
       return null;
     }
@@ -411,9 +422,10 @@ class Status extends ImmutablePureComponent {
       toggleSensitive: this.handleHotkeyToggleSensitive,
     };
     //02.17.2021 - pass dings to display name to show reward badge.
-      let dings = 0;
-      if (this.props && this.props.statuses)
-        dings = parseInt(this.props.statuses.size);
+  
+    let dings = parseInt(localStorage.getItem("statuses_Count"));
+    console.log('dispatch', localStorage.getItem("statuses_Count"));
+
     
     return (
       <HotKeys handlers={handlers}>

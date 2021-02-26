@@ -85,8 +85,7 @@ class Header extends ImmutablePureComponent {
   }
 
   render () {
-    const { account, intl, domain, identity_proofs } = this.props;
-
+    const { account, intl, domain, identity_proofs } = this.props;    
     if (!account) {
       return null;
     }
@@ -197,7 +196,8 @@ class Header extends ImmutablePureComponent {
       menu.push(null);
       menu.push({ text: intl.formatMessage(messages.admin_account, { name: account.get('username') }), href: `/admin/accounts/${account.get('id')}` });
     }
-    //eg add 02.16.2021    
+    //eg add 02.16.2021  
+    
     const dingCount       = parseInt(account.get('statuses_count'));  
     const rewardIcon      = dingCount >= 1000 ? <GiNinjaHead /> : dingCount >= 500 ? <GrStar  /> : dingCount >= 100 ? <GiCricket /> : null;
     const rewardMessage      = dingCount >= 1000 ? "Ninja (1000+ Dings)"  
