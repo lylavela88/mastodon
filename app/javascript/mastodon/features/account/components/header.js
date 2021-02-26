@@ -11,8 +11,7 @@ import Avatar from 'mastodon/components/avatar';
 import { shortNumberFormat } from 'mastodon/utils/numbers';
 import { NavLink } from 'react-router-dom';
 import DropdownMenuContainer from 'mastodon/containers/dropdown_menu_container';
-import {GiNinjaHead, GiCricket} from 'react-icons/gi/index';
-import {GrStar} from 'react-icons/gr/index';
+import {GiNinjaHead, GiCricket, GiNinjaStar} from 'react-icons/gi/index';
 import { IconContext } from "react-icons";
 
 
@@ -199,7 +198,7 @@ class Header extends ImmutablePureComponent {
     //eg add 02.16.2021  
     
     const dingCount       = parseInt(account.get('statuses_count'));  
-    const rewardIcon      = dingCount >= 1000 ? <GiNinjaHead /> : dingCount >= 500 ? <GrStar  /> : dingCount >= 100 ? <GiCricket /> : null;
+    const rewardIcon      = dingCount >= 1000 ? <GiNinjaHead /> : dingCount >= 500 ? <GiNinjaStar  /> : dingCount >= 100 ? <GiCricket /> : null;
     const rewardMessage      = dingCount >= 1000 ? "Ninja (1000+ Dings)"  
                               : dingCount >= 500 ? "Superstar (500+ Dings)" 
                               : dingCount >= 100 ? "Grasshopper (100+ Dings)"  : null;
