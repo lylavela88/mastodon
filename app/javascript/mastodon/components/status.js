@@ -116,7 +116,7 @@ class Status extends ImmutablePureComponent {
     //02.26.2021 EG-- this is to fetch the account's total status count of the current status. I store it in local storage due to not quite understanding React yet. 
     //Would you take on this challenge to retreive the total number of statuses? See way below where I access localStorage.getItem("statuses_Count");
     //The localstorage value is stored in the function fetchStatuscount .
-    this.props.dispatch(fetchStatusCount(this.props.status.getIn(['account', 'id'])));
+    // this.props.dispatch(fetchStatusCount(this.props.status.getIn(['account', 'id'])));
   }
 
   getSnapshotBeforeUpdate () {
@@ -287,7 +287,11 @@ class Status extends ImmutablePureComponent {
 
     const { intl, hidden, featured, otherAccounts, unread, showThread } = this.props;
     let { status, account, isOrigin,  ...other } = this.props;
-
+    
+    //02.26.2021 EG-- this is to fetch the account's total status count of the current status. I store it in local storage due to not quite understanding React yet. 
+    //Would you take on this challenge to retreive the total number of statuses? See way below where I access localStorage.getItem("statuses_Count");
+    //The localstorage value is stored in the function fetchStatuscount .
+     this.props.dispatch(fetchStatusCount(status.getIn(['account', 'id'])));
 
     if (status === null) {
       return null;
@@ -424,8 +428,10 @@ class Status extends ImmutablePureComponent {
     //02.17.2021 - pass dings to display name to show reward badge.
   
     let dings = 0;
+    console.log('really', localStorage.getItem("statuses_Count"));
     if (localStorage.getItem("statuses_Count"))
       dings = parseInt(localStorage.getItem("statuses_Count"));
+
     
     return (
       <HotKeys handlers={handlers}>

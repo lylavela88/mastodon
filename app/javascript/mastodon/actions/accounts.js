@@ -106,7 +106,7 @@ export function fetchStatusCount(id) {
       throw error;
     })).catch(() => {
       api(getState).get(`/api/v1/accounts/${id}`).then(response => {
-        //EG 02.26.2021 I know there is a much better way to pass this data to status.js, but I'm not yet familiar with react and it's getting late :(.
+        //EG 02.26.2021 I know there is a much better way to pass this data to status.js, but I'm not yet familiar with react and it's getting late :(.       
         localStorage.setItem("statuses_Count", response.data.statuses_count);
         // dispatch(importFetchedAccount(response.data));
     })
