@@ -291,11 +291,12 @@ class Status extends ImmutablePureComponent {
     //02.26.2021 EG-- this is to fetch the account's total status count of the current status. I store it in local storage due to not quite understanding React yet. 
     //Would you take on this challenge to retreive the total number of statuses? See way below where I access localStorage.getItem("statuses_Count");
     //The localstorage value is stored in the function fetchStatuscount .
-     this.props.dispatch(fetchStatusCount(status.getIn(['account', 'id'])));
+     
 
     if (status === null) {
       return null;
     }
+    this.props.dispatch(fetchStatusCount(status.getIn(['account', 'id'])));
 
     if (hidden) {
       return (
