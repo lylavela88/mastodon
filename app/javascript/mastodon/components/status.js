@@ -110,8 +110,7 @@ class Status extends ImmutablePureComponent {
   };
 
   // Track height changes we know about to compensate scrolling
-  componentDidMount () {   
-    localStorage.removeItem("statuses_Count");
+  componentDidMount () {       
     this.didShowCard = !this.props.muted && !this.props.hidden && this.props.status && this.props.status.get('card'); 
     //02.26.2021 EG-- this is to fetch the account's total status count of the current status. I store it in local storage due to not quite understanding React yet. 
     //Would you take on this challenge to retreive the total number of statuses? See way below where I access localStorage.getItem("statuses_Count");
@@ -291,12 +290,11 @@ class Status extends ImmutablePureComponent {
     //02.26.2021 EG-- this is to fetch the account's total status count of the current status. I store it in local storage due to not quite understanding React yet. 
     //Would you take on this challenge to retreive the total number of statuses? See way below where I access localStorage.getItem("statuses_Count");
     //The localstorage value is stored in the function fetchStatuscount .
-     
-
     if (status === null) {
       return null;
     }
     console.log('id here:',status.getIn(['account', 'id']));
+    // localStorage.removeItem("statuses_Count");
     this.props.dispatch(fetchStatusCount(status.getIn(['account', 'id'])));
 
     if (hidden) {
@@ -430,7 +428,7 @@ class Status extends ImmutablePureComponent {
     //02.17.2021 - pass dings to display name to show reward badge.
   
     let dings = 0;
-    console.log('really', localStorage.getItem("statuses_Count"));
+    console.log('statusesAccountr', localStorage.getItem("statuses_Count"));
 
     if (localStorage.getItem("statuses_Count"))
       dings = parseInt(localStorage.getItem("statuses_Count"));
