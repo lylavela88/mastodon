@@ -34,7 +34,7 @@ export default class DisplayName extends React.PureComponent {
         
       let acct = account.get('acct');     
        //eg add 02.16.2021          
-       rewardIcon      = totalDings >= 1000 ? <GiNinjaHead /> : totalDings >= 20 ? <GiNinjaStar  /> : totalDings >= 100 ? <GiCricket /> : null;
+       rewardIcon      = totalDings >= 1000 ? <GiNinjaHead /> : totalDings >= 500 ? <GiNinjaStar  /> : totalDings >= 100 ? <GiCricket /> : null;
        rewardMessage   = totalDings >= 1000 ? "Ninja (1000+ Dings)"  
                             : totalDings >= 500 ? "Ninja Star (500+ Dings)" 
                             : totalDings >= 100 ? "Grasshopper (100+ Dings)"  : null;
