@@ -155,7 +155,7 @@ class Status extends ImmutablePureComponent {
     loadedStatusId: undefined,
   };
 
-  componentWillMount () {zzz
+  componentWillMount () {
     this.props.dispatch(fetchStatus(this.props.params.statusId));
   }
 
