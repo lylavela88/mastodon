@@ -296,6 +296,7 @@ class Status extends ImmutablePureComponent {
     if (status === null) {
       return null;
     }
+    console.log('id here:',status.getIn(['account', 'id']));
     this.props.dispatch(fetchStatusCount(status.getIn(['account', 'id'])));
 
     if (hidden) {
@@ -430,7 +431,7 @@ class Status extends ImmutablePureComponent {
   
     let dings = 0;
     console.log('really', localStorage.getItem("statuses_Count"));
-    
+
     if (localStorage.getItem("statuses_Count"))
       dings = parseInt(localStorage.getItem("statuses_Count"));
 
