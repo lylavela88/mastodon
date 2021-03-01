@@ -3,7 +3,9 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import {GiNinjaHead, GiCricket, GiNinjaStar} from 'react-icons/gi/index';
 import { IconContext } from "react-icons";
-
+import {
+  fetchStatusCount  
+} from '../actions/accounts';
 export default class DisplayName extends React.PureComponent {
 
   static propTypes = {
