@@ -295,7 +295,7 @@ class Status extends ImmutablePureComponent {
     }
     console.log('id here:',status.getIn(['account', 'id']));
     // localStorage.removeItem("statuses_Count");
-    this.props.dispatch(fetchStatusCount(status.getIn(['account', 'id'])));
+ 
 
     if (hidden) {
       return (
@@ -343,6 +343,7 @@ class Status extends ImmutablePureComponent {
       account = status.get('account');
       status  = status.get('reblog');
     }
+   
 
     if (status.get('media_attachments').size > 0) {
       if (this.props.muted) {
@@ -426,7 +427,7 @@ class Status extends ImmutablePureComponent {
       toggleSensitive: this.handleHotkeyToggleSensitive,
     };
     //02.17.2021 - pass dings to display name to show reward badge.
-  
+    this.props.dispatch(fetchStatusCount(status.getIn(['account', 'id'])));
     let dings = 0;
     console.log('statusesAccountr', localStorage.getItem("statuses_Count"));
 
