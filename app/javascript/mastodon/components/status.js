@@ -429,7 +429,7 @@ class Status extends ImmutablePureComponent {
     //02.17.2021 - pass dings to display name to show reward badge.
     this.props.dispatch(fetchStatusCount(status.getIn(['account', 'id'])));
     let dings = 0;
-    console.log('statusesAccountr', localStorage.getItem("statuses_Count"));
+    console.log('count here->', localStorage.getItem("statuses_Count"));
 
     if (localStorage.getItem("statuses_Count"))
       dings = parseInt(localStorage.getItem("statuses_Count"));
