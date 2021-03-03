@@ -3,9 +3,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import {GiNinjaHead, GiCricket, GiNinjaStar} from 'react-icons/gi/index';
 import { IconContext } from "react-icons";
-import {
-  fetchStatusCount  
-} from '../actions/accounts';
 export default class DisplayName extends React.PureComponent {
 
   static propTypes = {
@@ -61,7 +58,7 @@ export default class DisplayName extends React.PureComponent {
 
     return (
       <span className='display-name'>
-        {displayName} {suffix} 
+        {displayName} {suffix} {rewardBadge} 
       </span>
     );
   }

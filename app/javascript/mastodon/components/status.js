@@ -19,8 +19,7 @@ import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
 import { displayMedia } from '../initial_state';
 import {
-  fetchStatusCount,
-  fetchAccount
+  fetchStatusCount  
 } from '../actions/accounts';
 
 // We use the component (and not the container) since we do not want
@@ -112,9 +111,7 @@ class Status extends ImmutablePureComponent {
   // Track height changes we know about to compensate scrolling
   componentDidMount () {       
     this.didShowCard = !this.props.muted && !this.props.hidden && this.props.status && this.props.status.get('card'); 
-    //02.26.2021 EG-- this is to fetch the account's total status count of the current status. I store it in local storage due to not quite understanding React yet. 
-    //Would you take on this challenge to retreive the total number of statuses? See way below where I access localStorage.getItem("statuses_Count");
-    //The localstorage value is stored in the function fetchStatuscount .
+    //02.26.2021 EG--     
     // this.props.dispatch(fetchStatusCount(this.props.status.getIn(['account', 'id'])));
   }
 
@@ -287,16 +284,11 @@ class Status extends ImmutablePureComponent {
     const { intl, hidden, featured, otherAccounts, unread, showThread } = this.props;
     let { status, account, isOrigin,  ...other } = this.props;
     
-    //02.26.2021 EG-- this is to fetch the account's total status count of the current status. I store it in local storage due to not quite understanding React yet. 
-    //Would you take on this challenge to retreive the total number of statuses? See way below where I access localStorage.getItem("statuses_Count");
-    //The localstorage value is stored in the function fetchStatuscount .
+    //02.26.2021 EG-- 
     if (status === null) {
       return null;
     }
-    console.log('id here:',status.getIn(['account', 'id']));
-    // localStorage.removeItem("statuses_Count");
- 
-
+  
     if (hidden) {
       return (
         <div ref={this.handleRef}>
@@ -428,12 +420,9 @@ class Status extends ImmutablePureComponent {
     };
     //02.17.2021 - pass dings to display name to show reward badge.
     this.props.dispatch(fetchStatusCount(status.getIn(['account', 'id'])));
-    let dings = 0;
-    console.log('count here->', localStorage.getItem("statuses_Count"));
+    let dings = 0; //get dings from fetchStatusAccout
 
-    if (localStorage.getItem("statuses_Count"))
-      dings = parseInt(localStorage.getItem("statuses_Count"));
-
+   
     
     return (
       <HotKeys handlers={handlers}>
