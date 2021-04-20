@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Status from '../components/status';
-import { makeGetStatus } from '../selectors';
+import { makeGetStatus, makeGetAccount } from '../selectors';
 import {
   replyCompose,
   mentionCompose,
@@ -42,10 +42,11 @@ const messages = defineMessages({
 });
 const makeMapStateToProps = () => {
   const getStatus = makeGetStatus();
-
+  const getAccount = makeGetAccount();
   const mapStateToProps = (state, props) => {
-    return {
+    return {      
       status: getStatus(state, props),
+      dingCount: getAccount(state, getStatus(state, props).getIn(['account', 'id'])).get('statuses_count') //eg 
     };
   };
 

@@ -74,6 +74,7 @@ export const FOLLOW_REQUEST_REJECT_REQUEST = 'FOLLOW_REQUEST_REJECT_REQUEST';
 export const FOLLOW_REQUEST_REJECT_SUCCESS = 'FOLLOW_REQUEST_REJECT_SUCCESS';
 export const FOLLOW_REQUEST_REJECT_FAIL    = 'FOLLOW_REQUEST_REJECT_FAIL';
 
+
 function getFromDB(dispatch, getState, index, id) {
   return new Promise((resolve, reject) => {
     const request = index.get(id);
@@ -91,6 +92,7 @@ function getFromDB(dispatch, getState, index, id) {
     };
   });
 }
+
 //add - EG 02.25.2021
 export function fetchStatusCount(id) {
   return (dispatch, getState) => {
@@ -123,8 +125,7 @@ export function fetchAccount(id) {
 
     if (getState().getIn(['accounts', id], null) !== null) {
       return;
-    }
-
+    }   
     dispatch(fetchAccountRequest(id));
 
     openDB().then(db => getFromDB(

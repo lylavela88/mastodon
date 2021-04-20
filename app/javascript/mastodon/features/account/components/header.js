@@ -198,6 +198,7 @@ class Header extends ImmutablePureComponent {
     //eg add 02.16.2021  
     
     const dingCount       = parseInt(account.get('statuses_count'));  
+    
     const rewardIcon      = dingCount >= 1000 ? <GiNinjaHead /> : dingCount >= 500 ? <GiNinjaStar  /> : dingCount >= 100 ? <GiCricket /> : null;
     const rewardMessage      = dingCount >= 1000 ? "Ninja (1000+ Dings)"  
                               : dingCount >= 500 ? "Ninja Star (500+ Dings)" 
