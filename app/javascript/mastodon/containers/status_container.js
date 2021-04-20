@@ -46,7 +46,7 @@ const makeMapStateToProps = () => {
   const mapStateToProps = (state, props) => {
     return {      
       status: getStatus(state, props),
-      dingCount: getAccount(state, getStatus(state, props).getIn(['account', 'id'])).get('statuses_count') //eg 
+      dingCount: getStatus(state, props) ? getAccount(state, getStatus(state, props).getIn(['account', 'id'])).get('statuses_count') : 0 //eg 
     };
   };
 
