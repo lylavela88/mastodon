@@ -3,18 +3,20 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import {GiNinjaHead, GiCricket, GiNinjaStar} from 'react-icons/gi/index';
 import { IconContext } from "react-icons";
+import {
+  fetchStatusCount  
+} from '../actions/accounts';
 export default class DisplayName extends React.PureComponent {
 
   static propTypes = {
     account: ImmutablePropTypes.map.isRequired,
-    others: ImmutablePropTypes.list,
-    totalDings: PropTypes.number,
-    localDomain: PropTypes.string    
+    others: ImmutablePropTypes.list,    
+    localDomain: PropTypes.string
   };
-
+  // totalDings: PropTypes.number,
 
   render () {
-    const { others, localDomain, totalDings } = this.props;
+    const { others, localDomain, totalDings } = this.props; //{others, localDomain,totalDings}
     let displayName, suffix, account, rewardIcon, rewardMessage, rewardBadge;
     
 
@@ -31,9 +33,11 @@ export default class DisplayName extends React.PureComponent {
         account = this.props.account;
       }
         
-      let acct = account.get('acct');     
+      let acct = account.get('acct');        
+      // let totalDings = 21;   
        //eg add 02.16.2021          
-       rewardIcon      = totalDings >= 1000 ? <GiNinjaHead /> : totalDings >= 20 ? <GiNinjaStar  /> : totalDings >= 100 ? <GiCricket /> : null;
+      
+       rewardIcon      = totalDings >= 1000 ? <GiNinjaHead /> : totalDings >= 500 ? <GiNinjaStar  /> : totalDings >= 100 ? <GiCricket /> : null;
        rewardMessage   = totalDings >= 1000 ? "Ninja (1000+ Dings)"  
                             : totalDings >= 500 ? "Ninja Star (500+ Dings)" 
                             : totalDings >= 100 ? "Grasshopper (100+ Dings)"  : null;

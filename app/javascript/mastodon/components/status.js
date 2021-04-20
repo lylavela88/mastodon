@@ -17,6 +17,7 @@ import { MediaGallery, Video } from '../features/ui/util/async-components';
 import { HotKeys } from 'react-hotkeys';
 import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
+import {makeGetAccount} from '../selectors';
 import { displayMedia } from '../initial_state';
 import {
   fetchStatusCount  
@@ -65,6 +66,7 @@ class Status extends ImmutablePureComponent {
   static propTypes = {
     status: ImmutablePropTypes.map,
     account: ImmutablePropTypes.map,
+    dingCount: PropTypes.number,
     otherAccounts: ImmutablePropTypes.list,
     onClick: PropTypes.func,
     onReply: PropTypes.func,
@@ -123,7 +125,7 @@ class Status extends ImmutablePureComponent {
     }
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps, prevState) {    
     if (nextProps.status && nextProps.status.get('id') !== prevState.statusId) {
       return {
         showMedia: defaultMediaVisibility(nextProps.status),
@@ -282,7 +284,7 @@ class Status extends ImmutablePureComponent {
      
 
     const { intl, hidden, featured, otherAccounts, unread, showThread } = this.props;
-    let { status, account, isOrigin,  ...other } = this.props;
+    let { status, account, dingCount, isOrigin,  ...other } = this.props;
     
     //02.26.2021 EG-- 
     if (status === null) {
@@ -418,12 +420,7 @@ class Status extends ImmutablePureComponent {
       toggleHidden: this.handleHotkeyToggleHidden,
       toggleSensitive: this.handleHotkeyToggleSensitive,
     };
-    //02.17.2021 - pass dings to display name to show reward badge.
-    this.props.dispatch(fetchStatusCount(status.getIn(['account', 'id'])));
-    let dings = 0; //get dings from fetchStatusAccout
-
-   
-    
+        
     return (
       <HotKeys handlers={handlers}>
         <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
@@ -438,7 +435,7 @@ class Status extends ImmutablePureComponent {
                 <div className='status__avatar'>
                   {statusAvatar}
                 </div>
-               <DisplayName totalDings={dings} account={status.get('account')} others={otherAccounts} /> 
+               <DisplayName totalDings={dingCount} account={status.get('account')} others={otherAccounts} /> 
                
               </a>
              
