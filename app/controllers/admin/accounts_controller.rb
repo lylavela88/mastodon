@@ -2,7 +2,7 @@
 
 module Admin
   class AccountsController < BaseController
-    before_action :set_account, only: [:show, :redownload, :remove_avatar, :remove_header, :enable, :unsilence, :unsuspend, :memorialize, :approve, :reject]
+    before_action :set_account, only: [:show, :redownload, :remove_avatar, :remove_header, :enable, :unsilence, :unsuspend, :memorialize, :approve, :reject, :approve_live_stream]
     before_action :require_remote_account!, only: [:redownload]
     before_action :require_local_account!, only: [:enable, :memorialize, :approve, :reject]
 
@@ -88,6 +88,16 @@ module Admin
       log_action :remove_header, @account.user
 
       redirect_to admin_account_path(@account.id)
+    end
+
+    def approve_live_stream
+      authorize @account, :approve_live_stream?
+    
+      if @account.update!(can_stream: true)
+        LiveStreamMailer.approved(@account).deliver_now
+
+        redirect_to admin_account_path(@account.id)
+      end
     end
 
     private

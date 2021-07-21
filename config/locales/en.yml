@@ -715,6 +715,14 @@ en:
     updated_msg: Your account migration setting successfully updated!
   moderation:
     title: Moderation
+  live_stream_mailer:
+    registration:
+      subject: 'New Request for Live Stream'
+      title: 'New Request for Live Stream'
+    approved:
+      subject: 'Approved - Live Stream Request'
+      title: 'Congratulations! Live Stream Request Approved'
+      body: 'Now, You can livestream!'
   notification_mailer:
     digest:
       action: View all notifications

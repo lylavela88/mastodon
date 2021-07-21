@@ -2748,6 +2748,10 @@ a.account__display-name {
   color: $highlight-text-color;
 }
 
+i.fa-video-camera {
+  color: $button-red
+}
+
 .status-card {
   display: flex;
   font-size: 14px;
@@ -4313,6 +4317,7 @@ a.status-card.compact:hover {
 .confirmation-modal,
 .report-modal,
 .actions-modal,
+.live-stream-modal,
 .mute-modal {
   background: lighten($ui-secondary-color, 8%);
   color: $inverted-text-color;
@@ -4365,6 +4370,7 @@ a.status-card.compact:hover {
   }
 }
 
+.live-stream-modal__action-bar,
 .boost-modal__action-bar,
 .confirmation-modal__action-bar,
 .mute-modal__action-bar {
@@ -4386,6 +4392,10 @@ a.status-card.compact:hover {
   }
 }
 
+.live-stream-modal__action-bar {
+  justify-content: center;
+}
+
 .boost-modal__status-header {
   font-size: 15px;
 }
@@ -4404,6 +4414,11 @@ a.status-card.compact:hover {
 }
 
 .report-modal {
+  width: 90vw;
+  max-width: 700px;
+}
+
+.live-stream-modal {
   width: 90vw;
   max-width: 700px;
 }
@@ -4584,6 +4599,7 @@ a.status-card.compact:hover {
   }
 }
 
+.live-stream-modal__target,
 .confirmation-modal__container,
 .mute-modal__container,
 .report-modal__target {
@@ -4600,6 +4616,26 @@ a.status-card.compact:hover {
       }
     }
   }
+}
+
+.live-stream-modal__container {
+  padding: 20px;
+  font-size: 16px;
+  text-align: center;
+
+  strong {
+    font-weight: 500;
+
+    @each $lang in $cjk-langs {
+      &:lang(#{$lang}) {
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.live-stream-modal__target {
+  color: $classic-highlight-color;
 }
 
 .report-modal__target {

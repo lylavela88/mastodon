@@ -54,6 +54,7 @@ export default class Button extends React.PureComponent {
         onClick={this.handleClick}
         ref={this.setRef}
         style={style}
+        form={this.props.form}
       >
         {this.props.text || this.props.children}
       </button>

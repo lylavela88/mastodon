@@ -52,4 +52,8 @@ class AccountPolicy < ApplicationPolicy
   def memorialize?
     admin? && !record.user&.admin?
   end
+
+  def approve_live_stream?
+    admin?
+  end
 end
