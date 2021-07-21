@@ -10,6 +10,8 @@ import VideoModal from './video_modal';
 import BoostModal from './boost_modal';
 import ConfirmationModal from './confirmation_modal';
 import FocalPointModal from './focal_point_modal';
+import LiveStreamModal from './live_stream_modal'
+import LiveStreamRegistrationModal from './live_stream_registration_modal'
 import {
   MuteModal,
   ReportModal,
@@ -30,6 +32,8 @@ const MODAL_COMPONENTS = {
   'LIST_EDITOR': ListEditor,
   'FOCAL_POINT': () => Promise.resolve({ default: FocalPointModal }),
   'LIST_ADDER':ListAdder,
+  'LIVE_STREAM_REGISTRATION': () => Promise.resolve({ default: LiveStreamRegistrationModal }),
+  'LIVE_STREAM': () => Promise.resolve({ default: LiveStreamModal }),
 };
 
 export default class ModalRoot extends React.PureComponent {
@@ -53,7 +57,7 @@ export default class ModalRoot extends React.PureComponent {
   }
 
   renderLoading = modalId => () => {
-    return ['MEDIA', 'VIDEO', 'BOOST', 'CONFIRM', 'ACTIONS'].indexOf(modalId) === -1 ? <ModalLoading /> : null;
+    return ['MEDIA', 'VIDEO', 'BOOST', 'CONFIRM', 'ACTIONS', 'LIVE_STREAM_REGISTRATION', 'LIVE_STREAM'].indexOf(modalId) === -1 ? <ModalLoading /> : null;
   }
 
   renderError = (props) => {

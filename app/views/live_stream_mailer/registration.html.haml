@@ -1,0 +1,72 @@
+%table.email-table{ cellspacing: 0, cellpadding: 0 }
+  %tbody
+    %tr
+      %td.email-body
+        .email-container
+          %table.content-section{ cellspacing: 0, cellpadding: 0 }
+            %tbody
+              %tr
+                %td.content-cell.hero
+                  .email-row
+                    .col-6
+                      %table.column{ cellspacing: 0, cellpadding: 0 }
+                        %tbody
+                          %tr
+                            %td.column-cell.text-center.padded
+                              %table.hero-icon{ align: 'center', cellspacing: 0, cellpadding: 0 }
+                                %tbody
+                                  %tr
+                                    %td
+                                      = image_tag full_pack_url('media/images/mailer/icon_email.png'), alt: ''
+
+                              %h1= t 'live_stream_mailer.registration.title'
+%table.email-table{ cellspacing: 0, cellpadding: 0 }
+  %tbody
+    %tr
+      %td.email-body
+        .email-container
+          %table.content-section{ cellspacing: 0, cellpadding: 0 }
+            %tbody
+              %tr
+                %td.content-cell.content-start
+                  .email-row
+                    - @data.each do |label, value|
+                      .col-3
+                        %table.column{ cellspacing: 0, cellpadding: 0 }
+                          %tbody
+                            %tr
+                              %td.column-cell.input-cell.text-center.padded-bottom
+                                %h5= label.titleize
+                      .col-3
+                        %table.column{ cellspacing: 0, cellpadding: 0 }
+                          %tbody
+                            %tr
+                              %td.column-cell
+                                %p
+                                  = value
+
+%table.email-table{ cellspacing: 0, cellpadding: 0 }
+  %tbody
+    %tr
+      %td.email-body
+        .email-container
+          %table.content-section{ cellspacing: 0, cellpadding: 0 }
+            %tbody
+              %tr
+                %td.content-cell.content-start.border-top
+                  %table.column{ cellspacing: 0, cellpadding: 0 }
+                    %tbody
+                      %tr
+                        %td.column-cell.button-cell
+                          %table.button{ align: 'center', cellspacing: 0, cellpadding: 0 }
+                            %tbody
+                              %tr
+                                %td.button-primary
+                                  = link_to approve_live_stream_admin_account_url(@account.id) do
+                                    %span
+                                      == Approve
+                                %td.spacer
+                                %td.button-alert
+                                  = link_to "#" do
+                                    %span
+                                      == Reject
