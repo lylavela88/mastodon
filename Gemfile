@@ -33,6 +33,8 @@ gem 'cld3', '~> 3.2.4'
 gem 'devise', '~> 4.6'
 gem 'devise-two-factor', '~> 3.0'
 
+gem 'wsc_sdk', '~> 1.3.1'
+
 group :pam_authentication, optional: true do
   gem 'devise_pam_authenticatable2', '~> 9.2'
 end
@@ -136,6 +138,7 @@ group :development do
   gem 'capistrano-rails', '~> 1.4'
   gem 'capistrano-rbenv', '~> 2.1'
   gem 'capistrano-yarn', '~> 2.0'
+  gem 'ultrahook', '~> 1.0.1'
 
   gem 'derailed_benchmarks'
   gem 'stackprof'

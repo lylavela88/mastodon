@@ -56,6 +56,9 @@ table {
 
 td {
   vertical-align: top;
+  .spacer {
+    width: 10px;
+  }
 }
 
 .email-table,
@@ -390,6 +393,10 @@ h5 {
 
 .button-primary {
   background-color: darken($ui-highlight-color, 3%);
+}
+
+.button-alert{
+  background-color: $button-red;
 }
 
 .text-center {

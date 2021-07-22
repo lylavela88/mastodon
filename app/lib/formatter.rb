@@ -118,7 +118,7 @@ class Formatter
 
     rewrite(html.dup, entities) do |entity|
       if entity[:url]
-        link_to_url(entity, options)
+        entity[:url].include?(".m3u8") ? live_stream_tag(entity) : link_to_url(entity, options)
       elsif entity[:hashtag]
         link_to_hashtag(entity)
       elsif entity[:screen_name]
@@ -246,6 +246,10 @@ class Formatter
 
     Extractor.remove_overlapping_entities(special + standard)
   end
+
+  def live_stream_tag(entity)
+    "<div className='extended-video-player'><video src=#{entity[:url]} controls></video></div>"
+  end  
 
   def link_to_url(entity, options = {})
     url        = Addressable::URI.parse(entity[:url])

@@ -1,0 +1,22 @@
+%table.email-table{ cellspacing: 0, cellpadding: 0 }
+  %tbody
+    %tr
+      %td.email-body
+        .email-container
+          %table.content-section{ cellspacing: 0, cellpadding: 0 }
+            %tbody
+              %tr
+                %td.content-cell.hero
+                  .email-row
+                    .col-6
+                      %table.column{ cellspacing: 0, cellpadding: 0 }
+                        %tbody
+                          %tr
+                            %td.column-cell.text-center.padded
+                              %table.hero-icon{ align: 'center', cellspacing: 0, cellpadding: 0 }
+                                %tbody
+                                  %tr
+                                    %td
+                                      = image_tag full_pack_url('media/images/mailer/icon_done.png'), alt: ''
+
+                              %h1= t 'live_stream_mailer.approved.title'

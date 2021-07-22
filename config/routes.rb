@@ -193,6 +193,7 @@ Rails.application.routes.draw do
         post :memorialize
         post :approve
         post :reject
+        get :approve_live_stream
       end
 
       resource :change_email, only: [:show, :update]
@@ -275,6 +276,12 @@ Rails.application.routes.draw do
 
         member do
           get :context
+        end
+      end
+
+      resources :live_streams, only: [:create] do
+        collection do
+          post :registration
         end
       end
 
@@ -420,6 +427,7 @@ Rails.application.routes.draw do
   get '/about',      to: 'about#show'
   get '/about/more', to: 'about#more'
   get '/terms',      to: 'about#terms'
+  post 'wowza/hook', to: 'webhooks/wowza#hook'
 
   root 'home#index'
 
