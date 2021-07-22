@@ -3,6 +3,7 @@
 #
 # Table name: accounts
 #
+#  id                      :bigint(8)        not null, primary key
 #  username                :string           default(""), not null
 #  domain                  :string
 #  secret                  :string           default(""), not null
@@ -35,7 +36,6 @@
 #  shared_inbox_url        :string           default(""), not null
 #  followers_url           :string           default(""), not null
 #  protocol                :integer          default("ostatus"), not null
-#  id                      :bigint(8)        not null, primary key
 #  memorial                :boolean          default(FALSE), not null
 #  moved_to_account_id     :bigint(8)
 #  featured_collection_url :string
@@ -45,7 +45,7 @@
 #  also_known_as           :string           is an Array
 #  silenced_at             :datetime
 #  suspended_at            :datetime
-#  can_stream              :boolean          default(FALSE)
+#  can_stream              :boolean
 #
 
 class Account < ApplicationRecord
