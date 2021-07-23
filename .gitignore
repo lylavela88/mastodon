@@ -22,7 +22,6 @@ public/assets
 public/packs
 public/packs-test
 .env
-
 node_modules/
 build/
 
