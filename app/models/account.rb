@@ -3,6 +3,7 @@
 #
 # Table name: accounts
 #
+
 #  username                :string           default(""), not null
 #  domain                  :string
 #  secret                  :string           default(""), not null
@@ -45,7 +46,8 @@
 #  also_known_as           :string           is an Array
 #  silenced_at             :datetime
 #  suspended_at            :datetime
-#  can_stream              :boolean          default(FALSE)
+#  can_stream              :boolean
+
 #
 
 class Account < ApplicationRecord

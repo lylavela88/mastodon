@@ -9,6 +9,7 @@ import { openModal } from '../../../actions/modal';
 import { goLive } from '../../../actions/live_stream';
 import LoadingIndicator from 'mastodon/components/loading_indicator';
 
+
 const messages = defineMessages({
   live_stream_title: { id: 'live_stream.title', defaultMessage: 'Live Stream!' },
   go_live: { id: 'live_stream.go_live',  defaultMessage: 'Go Live!'}
@@ -23,7 +24,9 @@ export default @connect(null, mapDispatchToProps)
 class LiveStreamModal extends React.PureComponent {
   constructor(props) {
     super(props);
+
     this.state = {title: '', vod: '0', disableSubmitButton: true, isLoading: false};
+
     this.handleChange = this.handleChange.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
   }

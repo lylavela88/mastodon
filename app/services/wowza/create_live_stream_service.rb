@@ -11,7 +11,6 @@ class Wowza::CreateLiveStreamService
     Wowza::SetTranscoderPropertyService.new(response["live_stream"]["id"]).call if !@vod.zero?
     Wowza::StartLiveStreamService.new(response["live_stream"]["id"]).call
     
-
     confirm_live_stream_started!(response)
 
     response["live_stream"].extract!(
@@ -21,6 +20,7 @@ class Wowza::CreateLiveStreamService
     )
   end
   
+
   def confirm_live_stream_started!(response)
     sleep 5.seconds
     counter = 0
@@ -33,7 +33,7 @@ class Wowza::CreateLiveStreamService
       sleep 5.seconds if state != 'started'
     end
   end  
-  
+
   def data
       {
         "live_stream": {
