@@ -7,6 +7,8 @@ import Button from '../../../components/button';
 import classNames from 'classnames';
 import { openModal } from '../../../actions/modal';
 import { goLive } from '../../../actions/live_stream';
+import LoadingIndicator from 'mastodon/components/loading_indicator';
+
 
 const messages = defineMessages({
   live_stream_title: { id: 'live_stream.title', defaultMessage: 'Live Stream!' },
@@ -22,14 +24,16 @@ export default @connect(null, mapDispatchToProps)
 class LiveStreamModal extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {title: '', vod: '0', disableSubmitButton: true};
+
+    this.state = {title: '', vod: '0', disableSubmitButton: true, isLoading: false};
+
     this.handleChange = this.handleChange.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    this.setState({disableSubmitButton: true});
+    this.setState({disableSubmitButton: true, isLoading: true});
     this.props.onSubmit(this.state.title, this.state.vod, this.props);
   }
 
@@ -44,6 +48,7 @@ class LiveStreamModal extends React.PureComponent {
 
   render () {
     const { value, intl } = this.props;
+    const loader = this.state.isLoading ? <LoadingIndicator /> : undefined
     return (
       <div className='modal-root__modal live-stream-modal'>
         <div className='live-stream-modal__target'>
@@ -79,7 +84,8 @@ class LiveStreamModal extends React.PureComponent {
               <span dangerouslySetInnerHTML={{ __html: 'No' }} />
             </label>
             <br />
-            <video id="25gj3fvq" x-webkit-airplay="allow" controls alt="Live" width="97%"></video>
+            <video id="25gj3fvq" x-webkit-airplay="allow" controls alt="Live" width="90%"></video>
+            { loader }
           </form>
         </div>
         <div className='live-stream-modal__action-bar'>
