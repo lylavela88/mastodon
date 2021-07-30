@@ -1,4 +1,4 @@
-lass Wowza::LiveStreamStateService
+class Wowza::LiveStreamStateService
   def initialize(id)
     @id = id
   end
