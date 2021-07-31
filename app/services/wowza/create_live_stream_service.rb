@@ -29,8 +29,9 @@ class Wowza::CreateLiveStreamService
     while (state!='started' && counter < 60)
       state_response = Wowza::LiveStreamStateService.new(response["live_stream"]["id"]).call
       state = state_response['live_stream']['state']
-      counter = counter + 5
-      sleep 5.seconds if state != 'started'
+      console.log(counter, state);      
+      counter = counter + 5;
+      sleep 10.seconds if state != 'started'
     end
   end  
 
