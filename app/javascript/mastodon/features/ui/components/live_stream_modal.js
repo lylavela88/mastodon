@@ -83,8 +83,8 @@ class LiveStreamModal extends React.PureComponent {
               />
               <span dangerouslySetInnerHTML={{ __html: 'No' }} />
             </label>
-            {/* <br />
-            <video id="25gj3fvq" x-webkit-airplay="allow" controls alt="Live" width="90%"></video> */}
+             <br /><br />
+           {/* <video id="25gj3fvq" x-webkit-airplay="allow" controls alt="Live" width="90%"></video> */}
             { loader }
           </form>
         </div>

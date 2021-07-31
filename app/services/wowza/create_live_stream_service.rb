@@ -28,9 +28,8 @@ class Wowza::CreateLiveStreamService
 
     while (state!='started' && counter < 60)
       state_response = Wowza::LiveStreamStateService.new(response["live_stream"]["id"]).call
-      state = state_response['live_stream']['state']
-      console.log(counter, state);      
-      counter = counter + 5;
+      state = state_response['live_stream']['state']       
+      counter = counter + 5
       sleep 10.seconds if state != 'started'
     end
   end  
@@ -41,7 +40,7 @@ class Wowza::CreateLiveStreamService
           "aspect_ratio_height": 1080,
           "aspect_ratio_width": 1920,
           "billing_mode": "pay_as_you_go",
-          "broadcast_location": "asia_pacific_india",
+          "broadcast_location": "us_east_s_carolina",
           "encoder": "other_webrtc",
           "name": @title,
           "playback_stream_name": @title,
