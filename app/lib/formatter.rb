@@ -118,7 +118,7 @@ class Formatter
 
     rewrite(html.dup, entities) do |entity|
       if entity[:url]
-        entity[:url].include?(".m3u8") ? live_stream_tag(entity) : link_to_url(entity, options)
+       link_to_url(entity, options) #  entity[:url].include?(".m3u8") ? live_stream_tag(entity) : 
       elsif entity[:hashtag]
         link_to_hashtag(entity)
       elsif entity[:screen_name]

@@ -56,7 +56,7 @@ class Wowza::CreateLiveStreamService
           "player_countdown": true,
           "player_countdown_at": "2020-02-01T17:00:00.000Z",
           "player_logo_position": "top-right",
-          "player_responsive": false,
+          "player_responsive": true,
           "player_type": "original_html5",
           "player_width": 640,
           "recording": true,
