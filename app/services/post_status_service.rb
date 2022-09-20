@@ -19,6 +19,7 @@ class PostStatusService < BaseService
   # @option [Enumerable] :media_ids Optional array of media IDs to attach
   # @option [Doorkeeper::Application] :application
   # @option [String] :idempotency Optional idempotency key
+  # @option [String] :group_id Optional group to post
   # @return [Status]
   def call(account, options = {})
     @account     = account
@@ -160,6 +161,7 @@ class PostStatusService < BaseService
       visibility: @visibility,
       language: language_from_option(@options[:language]) || @account.user&.setting_default_language&.presence || LanguageDetector.instance.detect(@text, @account),
       application: @options[:application],
+      group_id: @options[:group_id],
     }.compact
   end
 
@@ -181,6 +183,7 @@ class PostStatusService < BaseService
     @options.tap do |options_hash|
       options_hash[:in_reply_to_id] = options_hash.delete(:thread)&.id
       options_hash[:application_id] = options_hash.delete(:application)&.id
+      # options_hash[:group_id]       = options_hash[:group_id]
       options_hash[:scheduled_at]   = nil
       options_hash[:idempotency]    = nil
     end

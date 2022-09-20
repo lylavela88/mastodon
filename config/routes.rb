@@ -385,9 +385,7 @@ Rails.application.routes.draw do
         get :search, on: :collection
       end
 
-      resources :group_members, only: [:index, :create, :destroy] do
-        put :manage_post, on: :member
-      end
+      resources :group_members, only: [:index, :create, :update, :destroy]
 
       resources :polls, only: [:create, :show] do
         resources :votes, only: :create, controller: 'polls/votes'

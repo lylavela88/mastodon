@@ -34,6 +34,7 @@ class Api::V1::StatusesController < Api::BaseController
   end
 
   def create
+    # TODO: Need to authorize for group post
     @status = PostStatusService.new.call(current_user.account,
                                          text: status_params[:status],
                                          thread: status_params[:in_reply_to_id].blank? ? nil : Status.find(status_params[:in_reply_to_id]),
@@ -43,6 +44,7 @@ class Api::V1::StatusesController < Api::BaseController
                                          visibility: status_params[:visibility],
                                          scheduled_at: status_params[:scheduled_at],
                                          application: doorkeeper_token.application,
+                                         group_id: status_params[:group_id],
                                          poll: status_params[:poll],
                                          idempotency: request.headers['Idempotency-Key'])
 

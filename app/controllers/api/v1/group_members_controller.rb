@@ -5,7 +5,7 @@ class Api::V1::GroupMembersController < Api::BaseController
   before_action -> { doorkeeper_authorize! :write, :'write:group_members' }, except: [:index]
 
   before_action :require_user!
-  before_action :find_group_member, only: [:destroy, :manage_post]
+  before_action :find_group_member, only: [:destroy, :update]
 
   def index
     @group_members = @group.members
@@ -17,8 +17,8 @@ class Api::V1::GroupMembersController < Api::BaseController
     render json: @group_member, serializer: REST::GroupMemberSerializer
   end
 
-  def manage_post
-    @group_member.update!(can_post: group_member_params[:can_post])
+  def update
+    @group_member.update!(group_member_params)
     render json: @group_member, serializer: REST::GroupMemberSerializer
   end
 
