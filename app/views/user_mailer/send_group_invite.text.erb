@@ -1,0 +1,9 @@
+<%= t 'devise.mailer.send_group_invite.title' %>
+
+===
+
+<%= t('devise.mailer.send_group_invite.explanation', name: @group_name) %>
+
+=> <%= accept_group_invite_url(id: @token) %>
+
+<%= t 'devise.mailer.send_group_invite.extra' %>

@@ -39,6 +39,15 @@ class StatusPolicy < ApplicationPolicy
     staff?
   end
 
+  def can_post?
+    return true unless group.present?
+
+    grp_member = group.group_members.find_by(member_id: current_account.user&.id)
+    return true unless grp_member.present?
+
+    grp_member.can_post?
+  end
+
   private
 
   def requires_mention?
@@ -83,5 +92,9 @@ class StatusPolicy < ApplicationPolicy
 
   def author
     record.account
+  end
+
+  def group
+    record.group
   end
 end

@@ -25,6 +25,12 @@ en:
         extra_html: Please also check out <a href="%{terms_path}">the rules of the server</a> and <a href="%{policy_path}">our terms of service</a>.
         subject: 'Ding Dash: Confirmation instructions for %{instance}'
         title: Verify email address
+      send_group_invite:
+        subject: 'Congratulations!, You have been invited to join group.'
+        action: Accept Invitation
+        explanation: You are being invited to a group %{name}.
+        extra: If you don't want to join the group, please ignore this email.
+        title: Group Invite
       email_changed:
         explanation: 'The email address for your account is being changed to:'
         extra: If you did not change your email, it is likely that someone has gained access to your account. Please change your password immediately or contact the server admin if you're locked out of your account.

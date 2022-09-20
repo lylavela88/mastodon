@@ -136,6 +136,11 @@ Rails.application.routes.draw do
   resources :invites, only: [:index, :create, :destroy]
   resources :filters, except: [:show]
   resource :relationships, only: [:show, :update]
+  resources :group_invites, only: [] do
+    member do
+      get :accept
+    end
+  end
 
   get '/public', to: 'public_timelines#show', as: :public_timeline
   get '/media_proxy/:id/(*any)', to: 'media_proxy#show', as: :media_proxy
@@ -288,6 +293,7 @@ Rails.application.routes.draw do
       namespace :timelines do
         resource :home, only: :show, controller: :home
         resource :public, only: :show, controller: :public
+        resource :groups, only: :show, controller: :groups
         resources :tag, only: :show
         resources :list, only: :show
       end
@@ -373,6 +379,14 @@ Rails.application.routes.draw do
 
       resources :lists, only: [:index, :create, :show, :update, :destroy] do
         resource :accounts, only: [:show, :create, :destroy], controller: 'lists/accounts'
+      end
+
+      resources :groups, only: [:create] do
+        get :search, on: :collection
+      end
+
+      resources :group_members, only: [:index, :create, :destroy] do
+        put :manage_post, on: :member
       end
 
       resources :polls, only: [:create, :show] do

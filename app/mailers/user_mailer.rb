@@ -22,6 +22,19 @@ class UserMailer < Devise::Mailer
     end
   end
 
+  def send_group_invite(user, group_name, token)
+    @resource = user
+    @token = token
+    @group_name = group_name
+
+    return if @resource.disabled?
+
+    I18n.with_locale(@resource.locale || I18n.default_locale) do
+      mail to: @resource.unconfirmed_email.presence || @resource.email,
+           subject: I18n.t('devise.mailer.send_group_invite.subject')
+    end
+  end
+
   def reset_password_instructions(user, token, **)
     @resource = user
     @token    = token

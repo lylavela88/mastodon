@@ -28,6 +28,7 @@ import {
   AccountTimeline,
   AccountGallery,
   HomeTimeline,
+  GroupTimeline,
   Followers,
   Following,
   Reblogs,
@@ -157,6 +158,8 @@ class SwitchingColumnsArea extends React.PureComponent {
           <WrappedRoute path='/timelines/direct' component={DirectTimeline} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
           <WrappedRoute path='/timelines/tag/:id' component={HashtagTimeline} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
           <WrappedRoute path='/timelines/list/:id' component={ListTimeline} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
+          <WrappedRoute path='/timelines/groups' component={GroupTimeline} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
+
 
           <WrappedRoute path='/notifications' component={Notifications} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
           <WrappedRoute path='/favourites' component={FavouritedStatuses} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
