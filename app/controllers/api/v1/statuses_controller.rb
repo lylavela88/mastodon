@@ -34,7 +34,8 @@ class Api::V1::StatusesController < Api::BaseController
   end
 
   def create
-    # TODO: Need to authorize for group post
+    authorize Status.new(status_params[:group_id]), :can_post?
+
     @status = PostStatusService.new.call(current_user.account,
                                          text: status_params[:status],
                                          thread: status_params[:in_reply_to_id].blank? ? nil : Status.find(status_params[:in_reply_to_id]),

@@ -183,7 +183,6 @@ class PostStatusService < BaseService
     @options.tap do |options_hash|
       options_hash[:in_reply_to_id] = options_hash.delete(:thread)&.id
       options_hash[:application_id] = options_hash.delete(:application)&.id
-      # options_hash[:group_id]       = options_hash[:group_id]
       options_hash[:scheduled_at]   = nil
       options_hash[:idempotency]    = nil
     end

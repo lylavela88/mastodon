@@ -18,7 +18,7 @@ class Api::V1::GroupMembersController < Api::BaseController
   end
 
   def update
-    @group_member.update!(group_member_params)
+    @group_member = @group_member.update!(group_member_params)
     render json: @group_member, serializer: REST::GroupMemberSerializer
   end
 

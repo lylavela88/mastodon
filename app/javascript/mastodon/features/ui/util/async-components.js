@@ -34,10 +34,6 @@ export function ListTimeline () {
   return import(/* webpackChunkName: "features/list_timeline" */'../../list_timeline');
 }
 
-export function GroupTimeline () {
-  return import(/* webpackChunkName: "features/group_timeline" */'../../group_timeline');
-}
-
 export function Lists () {
   return import(/* webpackChunkName: "features/lists" */'../../lists');
 }
