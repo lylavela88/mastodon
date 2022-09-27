@@ -1752,6 +1752,23 @@
   {
     "descriptors": [
       {
+        "defaultMessage": "Groups",
+        "id": "column.groups"
+      },
+      {
+        "defaultMessage": "Your Groups",
+        "id": "groups.subheading"
+      },
+      {
+        "defaultMessage": "You don't have any groups yet.",
+        "id": "empty_column.groups"
+      }
+    ],
+    "path": "app/javascript/mastodon/features/groups/index.json"
+  },
+  {
+    "descriptors": [
+      {
         "defaultMessage": "Muted users",
         "id": "column.mutes"
       },

@@ -28,6 +28,7 @@ import {
   AccountTimeline,
   AccountGallery,
   HomeTimeline,
+  GroupTimeline,
   Followers,
   Following,
   Reblogs,
@@ -45,6 +46,7 @@ import {
   PinnedStatuses,
   Lists,
   Search,
+  NewGroup
 } from './util/async-components';
 import { me, forceSingleColumn } from '../../initial_state';
 import { previewState as previewMediaState } from './components/media_modal';
@@ -108,21 +110,21 @@ class SwitchingColumnsArea extends React.PureComponent {
     mobile: isMobile(window.innerWidth),
   };
 
-  componentWillMount () {
+  componentWillMount() {
     window.addEventListener('resize', this.handleResize, { passive: true });
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (![this.props.location.pathname, '/'].includes(prevProps.location.pathname)) {
       this.node.handleChildrenContentChange();
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
   }
 
-  shouldUpdateScroll (_, { location }) {
+  shouldUpdateScroll(_, { location }) {
     return location.state !== previewMediaState && location.state !== previewVideoState;
   }
 
@@ -139,7 +141,7 @@ class SwitchingColumnsArea extends React.PureComponent {
     this.node = c.getWrappedInstance();
   }
 
-  render () {
+  render() {
     const { children } = this.props;
     const { mobile } = this.state;
     const singleColumn = forceSingleColumn || mobile;
@@ -157,6 +159,9 @@ class SwitchingColumnsArea extends React.PureComponent {
           <WrappedRoute path='/timelines/direct' component={DirectTimeline} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
           <WrappedRoute path='/timelines/tag/:id' component={HashtagTimeline} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
           <WrappedRoute path='/timelines/list/:id' component={ListTimeline} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
+          <WrappedRoute path='/timelines/groups' component={GroupTimeline} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
+          <WrappedRoute path='/timelines/group-new' component={NewGroup} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
+
 
           <WrappedRoute path='/notifications' component={Notifications} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
           <WrappedRoute path='/favourites' component={FavouritedStatuses} content={children} componentParams={{ shouldUpdateScroll: this.shouldUpdateScroll }} />
@@ -300,7 +305,7 @@ class UI extends React.PureComponent {
     }
   }
 
-  componentWillMount () {
+  componentWillMount() {
     window.addEventListener('beforeunload', this.handleBeforeUnload, false);
 
     document.addEventListener('dragenter', this.handleDragEnter, false);
@@ -309,7 +314,7 @@ class UI extends React.PureComponent {
     document.addEventListener('dragleave', this.handleDragLeave, false);
     document.addEventListener('dragend', this.handleDragEnd, false);
 
-    if ('serviceWorker' in  navigator) {
+    if ('serviceWorker' in navigator) {
       navigator.serviceWorker.addEventListener('message', this.handleServiceWorkerPostMessage);
     }
 
@@ -323,13 +328,13 @@ class UI extends React.PureComponent {
     setTimeout(() => this.props.dispatch(fetchFilters()), 500);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.hotkeys.__mousetrap__.stopCallback = (e, element) => {
       return ['TEXTAREA', 'SELECT', 'INPUT'].includes(element.tagName);
     };
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('beforeunload', this.handleBeforeUnload);
     document.removeEventListener('dragenter', this.handleDragEnter);
     document.removeEventListener('dragover', this.handleDragOver);
@@ -368,7 +373,7 @@ class UI extends React.PureComponent {
   }
 
   handleHotkeyFocusColumn = e => {
-    const index  = (e.key * 1) + 1; // First child is drawer, skip that
+    const index = (e.key * 1) + 1; // First child is drawer, skip that
     const column = this.node.querySelector(`.column:nth-child(${index})`);
     if (!column) return;
     const container = column.querySelector('.scrollable');
@@ -453,7 +458,7 @@ class UI extends React.PureComponent {
     this.context.router.history.push('/follow_requests');
   }
 
-  render () {
+  render() {
     const { draggingOver } = this.state;
     const { children, isComposing, location, dropdownMenuIsOpen } = this.props;
 

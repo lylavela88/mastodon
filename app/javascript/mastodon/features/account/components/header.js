@@ -11,7 +11,7 @@ import Avatar from 'mastodon/components/avatar';
 import { shortNumberFormat } from 'mastodon/utils/numbers';
 import { NavLink } from 'react-router-dom';
 import DropdownMenuContainer from 'mastodon/containers/dropdown_menu_container';
-import {GiNinjaHead, GiCricket, GiNinjaStar} from 'react-icons/gi/index';
+import { GiNinjaHead, GiCricket, GiNinjaStar } from 'react-icons/gi/index';
 import { IconContext } from "react-icons";
 
 
@@ -39,6 +39,7 @@ const messages = defineMessages({
   preferences: { id: 'navigation_bar.preferences', defaultMessage: 'Preferences' },
   follow_requests: { id: 'navigation_bar.follow_requests', defaultMessage: 'Follow requests' },
   favourites: { id: 'navigation_bar.favourites', defaultMessage: 'Favourites' },
+  groups: { id: 'navigation_bar.groups', defaultMessage: 'Groups' },
   lists: { id: 'navigation_bar.lists', defaultMessage: 'Lists' },
   blocks: { id: 'navigation_bar.blocks', defaultMessage: 'Blocked users' },
   domain_blocks: { id: 'navigation_bar.domain_blocks', defaultMessage: 'Hidden domains' },
@@ -83,16 +84,16 @@ class Header extends ImmutablePureComponent {
     return !location.pathname.match(/\/(followers|following)\/?$/);
   }
 
-  render () {
-    const { account, intl, domain, identity_proofs } = this.props;    
+  render() {
+    const { account, intl, domain, identity_proofs } = this.props;
     if (!account) {
       return null;
     }
 
-    let info        = [];
-    let actionBtn   = '';
-    let lockedIcon  = '';
-    let menu        = [];
+    let info = [];
+    let actionBtn = '';
+    let lockedIcon = '';
+    let menu = [];
 
     if (me !== account.get('id') && account.getIn(['relationship', 'followed_by'])) {
       info.push(<span key='followed_by' className='relationship-tag'><FormattedMessage id='account.follows_you' defaultMessage='Follows you' /></span>);
@@ -196,30 +197,30 @@ class Header extends ImmutablePureComponent {
       menu.push({ text: intl.formatMessage(messages.admin_account, { name: account.get('username') }), href: `/admin/accounts/${account.get('id')}` });
     }
     //eg add 02.16.2021  
-    
-    const dingCount       = parseInt(account.get('statuses_count'));  
-    
-    const rewardIcon      = dingCount >= 1000 ? <GiNinjaHead /> : dingCount >= 500 ? <GiNinjaStar  /> : dingCount >= 100 ? <GiCricket /> : null;
-    const rewardMessage      = dingCount >= 1000 ? "Ninja (1000+ Dings)"  
-                              : dingCount >= 500 ? "Ninja Star (500+ Dings)" 
-                              : dingCount >= 100 ? "Grasshopper (100+ Dings)"  : null;
-    const rewardBadge     = rewardIcon != null ? 
-                              (
-                                <IconContext.Provider value={{ color: "#1ab595", size: "1.5em"}}>
-                                    <span style={{position: "absolute", paddingLeft: "5px"}} 
-                                          title={rewardMessage}>
-                                      {rewardIcon}
-                                    </span>
-                                  </IconContext.Provider>
-                              ) : null;
+
+    const dingCount = parseInt(account.get('statuses_count'));
+
+    const rewardIcon = dingCount >= 1000 ? <GiNinjaHead /> : dingCount >= 500 ? <GiNinjaStar /> : dingCount >= 100 ? <GiCricket /> : null;
+    const rewardMessage = dingCount >= 1000 ? "Ninja (1000+ Dings)"
+      : dingCount >= 500 ? "Ninja Star (500+ Dings)"
+        : dingCount >= 100 ? "Grasshopper (100+ Dings)" : null;
+    const rewardBadge = rewardIcon != null ?
+      (
+        <IconContext.Provider value={{ color: "#1ab595", size: "1.5em" }}>
+          <span style={{ position: "absolute", paddingLeft: "5px" }}
+            title={rewardMessage}>
+            {rewardIcon}
+          </span>
+        </IconContext.Provider>
+      ) : null;
     //eg add 02.16.2021
 
-    const content         = { __html: account.get('note_emojified') };
+    const content = { __html: account.get('note_emojified') };
     const displayNameHtml = { __html: account.get('display_name_html') };
-    const fields          = account.get('fields');
-    const badge           = account.get('bot') ? (<div className='account-role bot'><FormattedMessage id='account.badges.bot' defaultMessage='Bot' /></div>) : null;
+    const fields = account.get('fields');
+    const badge = account.get('bot') ? (<div className='account-role bot'><FormattedMessage id='account.badges.bot' defaultMessage='Bot' /></div>) : null;
 
-    const acct            = account.get('acct').indexOf('@') === -1 && domain ? `${account.get('acct')}@${domain}` : account.get('acct');
+    const acct = account.get('acct').indexOf('@') === -1 && domain ? `${account.get('acct')}@${domain}` : account.get('acct');
 
     return (
       <div className={classNames('account__header', { inactive: !!account.get('moved') })}>
@@ -251,12 +252,12 @@ class Header extends ImmutablePureComponent {
               <span dangerouslySetInnerHTML={displayNameHtml} /> {badge} {rewardBadge}
               <small>@{acct} {lockedIcon}</small>
             </h1>
-            
+
           </div>
 
           <div className='account__header__extra'>
             <div className='account__header__bio'>
-              { (fields.size > 0 || identity_proofs.size > 0) && (
+              {(fields.size > 0 || identity_proofs.size > 0) && (
                 <div className='account__header__fields'>
                   {identity_proofs.map((proof, i) => (
                     <dl key={i}>
@@ -266,7 +267,7 @@ class Header extends ImmutablePureComponent {
                         <a href={proof.get('proof_url')} target='_blank' rel='noopener'><span title={intl.formatMessage(messages.linkVerifiedOn, { date: intl.formatDate(proof.get('updated_at'), dateFormatOptions) })}>
                           <Icon id='check' className='verified__mark' />
                         </span></a>
-                        <a href={proof.get('profile_url')} target='_blank' rel='noopener'><span dangerouslySetInnerHTML={{ __html: ' '+proof.get('provider_username') }} /></a>
+                        <a href={proof.get('profile_url')} target='_blank' rel='noopener'><span dangerouslySetInnerHTML={{ __html: ' ' + proof.get('provider_username') }} /></a>
                       </dd>
                     </dl>
                   ))}

@@ -10,12 +10,12 @@ import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import ColumnLink from '../ui/components/column_link';
 import ColumnSubheading from '../ui/components/column_subheading';
-import NewListForm from './components/new_group_form';
+import NewGroupForm from './components/new_group_form';
 import { createSelector } from 'reselect';
 import ScrollableList from '../../components/scrollable_list';
 
 const messages = defineMessages({
-  heading: { id: 'column.groups', defaultMessage: 'Groups' },
+  heading: { id: 'column.groups', defaultMessage: 'New Group' },
   subheading: { id: 'groups.subheading', defaultMessage: 'Your Groups' },
 });
 
@@ -26,15 +26,15 @@ const getOrderedLists = createSelector([state => state.get('groups')], groups =>
 
   return groups.toList().filter(item => !!item).sort((a, b) => a.get('title').localeCompare(b.get('title')));
 });
-
 const mapStateToProps = state => ({
-  groups: getOrderedLists(state),
+  hasUnread: state.getIn(['timelines', 'groups', 'unread']) > 0,
+  isPartial: state.getIn(['timelines', 'groups', 'isPartial']),
 });
 
 export default @connect(mapStateToProps)
+
 @injectIntl
 class Groups extends ImmutablePureComponent {
-
   static propTypes = {
     params: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
@@ -42,20 +42,21 @@ class Groups extends ImmutablePureComponent {
     intl: PropTypes.object.isRequired,
   };
 
-  componentWillMount () {
+  componentWillMount() {
+
     this.props.dispatch(fetchGroups());
   }
 
-  render () {
+  render() {
     const { intl, shouldUpdateScroll, groups } = this.props;
 
-    if (!groups) {
-      return (
-        <Column>
-          <LoadingIndicator />
-        </Column>
-      );
-    }
+    // if (!groups) {
+    //   return (
+    //     <Column>
+    //       <LoadingIndicator />
+    //     </Column>
+    //   );
+    // }
 
     const emptyMessage = <FormattedMessage id='empty_column.groups' defaultMessage="You don't have any groups yet." />;
 
@@ -71,9 +72,9 @@ class Groups extends ImmutablePureComponent {
           emptyMessage={emptyMessage}
           prepend={<ColumnSubheading text={intl.formatMessage(messages.subheading)} />}
         >
-          // {groups.map(group =>
-          //   <ColumnLink key={group.get('id')} to={`/timelines/list/${list.get('id')}`} icon='list-ul' text={list.get('title')} />
-          // )}
+          {/* {groups.map(group =>
+            <ColumnLink key={group.get('id')} to={`/timelines/groups/${list.get('id')}`} icon='list-ul' text={list.get('title')} />
+          )} */}
         </ScrollableList>
       </Column>
     );

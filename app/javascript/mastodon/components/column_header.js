@@ -55,6 +55,9 @@ class ColumnHeader extends React.PureComponent {
     this.props.onClick();
   }
 
+  redirectToNewGroupForm = () => {
+    this.context.router.history.push('/timelines/group-new');
+  }
   handleMoveLeft = () => {
     this.props.onMove(-1);
   }
@@ -78,8 +81,8 @@ class ColumnHeader extends React.PureComponent {
     this.props.onPin();
   }
 
-  render () {
-    const { title, icon, active, children, pinned, multiColumn, extraButton, showBackButton, intl: { formatMessage } } = this.props;
+  render() {
+    const { title, icon, active, children, pinned, multiColumn, extraButton, showBackButton, intl: { formatMessage }, createGroupBtn, createGroupTitle } = this.props;
     const { collapsed, animating } = this.state;
 
     const wrapperClassName = classNames('column-header__wrapper', {
@@ -155,6 +158,13 @@ class ColumnHeader extends React.PureComponent {
               {title}
             </button>
           )}
+          {createGroupBtn &&
+            <div className='column-header__buttons'>
+              <button onClick={this.redirectToNewGroupForm} className={collapsibleButtonClassName} >
+                {createGroupTitle}
+              </button>
+            </div>}
+
 
           {!hasTitle && backButton}
 

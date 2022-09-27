@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 
 const messages = defineMessages({
   title: { id: 'column.groups', defaultMessage: 'Groups' },
+  createGroupTitle: { id: 'column.create_groups', defaultMessage: 'Create Groups' },
 });
 
 const mapStateToProps = state => ({
@@ -61,20 +62,20 @@ class GroupTimeline extends React.PureComponent {
     this.props.dispatch(expandGroupTimeline({ maxId }));
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this._checkIfReloadNeeded(false, this.props.isPartial);
     this.props.dispatch(updateAllStatuses());
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     this._checkIfReloadNeeded(prevProps.isPartial, this.props.isPartial);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this._stopPolling();
   }
-  
-  _checkIfReloadNeeded (wasPartial, isPartial) {
+
+  _checkIfReloadNeeded(wasPartial, isPartial) {
     const { dispatch } = this.props;
     if (wasPartial === isPartial) {
       return;
@@ -87,14 +88,14 @@ class GroupTimeline extends React.PureComponent {
     }
   }
 
-  _stopPolling () {
+  _stopPolling() {
     if (this.polling) {
       clearInterval(this.polling);
       this.polling = null;
     }
   }
 
-  render () {
+  render() {
     const { intl, shouldUpdateScroll, hasUnread, columnId, multiColumn } = this.props;
     const pinned = !!columnId;
 
@@ -109,7 +110,11 @@ class GroupTimeline extends React.PureComponent {
           onClick={this.handleHeaderClick}
           pinned={pinned}
           multiColumn={multiColumn}
+          createGroupBtn={true}
+          createGroupTitle={intl.formatMessage(messages.createGroupTitle)}
+
         >
+
           <ColumnSettingsContainer />
         </ColumnHeader>
 
