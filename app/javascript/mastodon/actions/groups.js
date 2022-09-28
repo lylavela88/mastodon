@@ -4,19 +4,19 @@ import { showAlertForError } from './alerts';
 
 export const GROUP_FETCH_REQUEST = 'GROUP_FETCH_REQUEST';
 export const GROUP_FETCH_SUCCESS = 'GROUP_FETCH_SUCCESS';
-export const GROUP_FETCH_FAIL = 'GROUP_FETCH_FAIL';
+export const GROUP_FETCH_FAIL    = 'GROUP_FETCH_FAIL';
 
 export const GROUPS_FETCH_REQUEST = 'GROUPS_FETCH_REQUEST';
 export const GROUPS_FETCH_SUCCESS = 'GROUPS_FETCH_SUCCESS';
-export const GROUPS_FETCH_FAIL = 'GROUPS_FETCH_FAIL';
+export const GROUPS_FETCH_FAIL    = 'GROUPS_FETCH_FAIL';
 
 export const GROUP_EDITOR_TITLE_CHANGE = 'GROUP_EDITOR_TITLE_CHANGE';
-export const GROUP_EDITOR_RESET = 'GROUP_EDITOR_RESET';
-export const GROUP_EDITOR_SETUP = 'GROUP_EDITOR_SETUP';
+export const GROUP_EDITOR_RESET        = 'GROUP_EDITOR_RESET';
+export const GROUP_EDITOR_SETUP        = 'GROUP_EDITOR_SETUP';
 
 export const GROUP_CREATE_REQUEST = 'GROUP_CREATE_REQUEST';
 export const GROUP_CREATE_SUCCESS = 'GROUP_CREATE_SUCCESS';
-export const GROUP_CREATE_FAIL = 'GROUP_CREATE_FAIL';
+export const GROUP_CREATE_FAIL    = 'GROUP_CREATE_FAIL';
 
 // export const LIST_UPDATE_REQUEST = 'LIST_UPDATE_REQUEST';
 // export const LIST_UPDATE_SUCCESS = 'LIST_UPDATE_SUCCESS';
@@ -24,11 +24,11 @@ export const GROUP_CREATE_FAIL = 'GROUP_CREATE_FAIL';
 
 export const GROUP_DELETE_REQUEST = 'GROUP_DELETE_REQUEST';
 export const GROUP_DELETE_SUCCESS = 'GROUP_DELETE_SUCCESS';
-export const GROUP_DELETE_FAIL = 'GROUP_DELETE_FAIL';
+export const GROUP_DELETE_FAIL    = 'GROUP_DELETE_FAIL';
 
 export const GROUP_MEMBERS_FETCH_REQUEST = 'GROUP_MEMBERS_FETCH_REQUEST';
 export const GROUP_MEMBERS_FETCH_SUCCESS = 'GROUP_MEMBERS_FETCH_SUCCESS';
-export const GROUP_MEMBERS_FETCH_FAIL = 'GROUP_MEMBERS_FETCH_FAIL';
+export const GROUP_MEMBERS_FETCH_FAIL    = 'GROUP_MEMBERS_FETCH_FAIL';
 
 // export const LIST_EDITOR_SUGGESTIONS_CHANGE = 'LIST_EDITOR_SUGGESTIONS_CHANGE';
 // export const LIST_EDITOR_SUGGESTIONS_READY  = 'LIST_EDITOR_SUGGESTIONS_READY';
@@ -36,18 +36,18 @@ export const GROUP_MEMBERS_FETCH_FAIL = 'GROUP_MEMBERS_FETCH_FAIL';
 
 export const GROUP_MEMBER_ADD_REQUEST = 'GROUP_MEMBER_ADD_REQUEST';
 export const GROUP_MEMBER_ADD_SUCCESS = 'GROUP_MEMBER_ADD_SUCCESS';
-export const GROUP_MEMBER_ADD_FAIL = 'GROUP_MEMBER_ADD_FAIL';
+export const GROUP_MEMBER_ADD_FAIL    = 'GROUP_MEMBER_ADD_FAIL';
 
 export const GROUP_MEMBER_REMOVE_REQUEST = 'GROUP_MEMBER_REMOVE_REQUEST';
 export const GROUP_MEMBER_REMOVE_SUCCESS = 'GROUP_MEMBER_REMOVE_SUCCESS';
-export const GROUP_MEMBER_REMOVE_FAIL = 'GROUP_MEMBER_REMOVE_FAIL';
+export const GROUP_MEMBER_REMOVE_FAIL    = 'GROUP_MEMBER_REMOVE_FAIL';
 
 export const GROUP_ADDER_RESET = 'GROUP_ADDER_RESET';
 export const GROUP_ADDER_SETUP = 'GROUP_ADDER_SETUP';
 
 export const GROUP_MEMBER_GROUPS_FETCH_REQUEST = 'GROUP_MEMBER_GROUPS_FETCH_REQUEST';
 export const GROUP_MEMBER_GROUPS_FETCH_SUCCESS = 'GROUP_MEMBER_GROUPS_FETCH_SUCCESS';
-export const GROUP_MEMBER_GROUPS_FETCH_FAIL = 'GROUP_MEMBER_GROUPS_FETCH_FAIL';
+export const GROUP_MEMBER_GROUPS_FETCH_FAIL    = 'GROUP_MEMBER_GROUPS_FETCH_FAIL';
 
 
 export const fetchList = id => (dispatch, getState) => {
@@ -102,7 +102,7 @@ export const fetchGroupsFail = error => ({
 
 export const submitListEditor = shouldReset => (dispatch, getState) => {
   const groupId = getState().getIn(['listEditor', 'listId']);
-  const title = getState().getIn(['listEditor', 'title']);
+  const title  = getState().getIn(['listEditor', 'title']);
 
   if (listId === null) {
     dispatch(createGroup(title, shouldReset));
@@ -129,7 +129,12 @@ export const createGroup = (value, shouldReset) => (dispatch, getState) => {
   dispatch(createGroupRequest());
 
   api(getState).post('/api/v1/groups', value).then(({ data }) => {
+    console.log(data)
     dispatch(createGroupSuccess(data));
+
+    // if (shouldReset) {
+    //   dispatch(resetListEditor());
+    // }
   }).catch(err => dispatch(createGroupFail(err)));
 };
 
@@ -366,4 +371,3 @@ export const addToGroupAdder = groupId => (dispatch, getState) => {
 export const removeFromGroupAdder = groupId => (dispatch, getState) => {
   dispatch(removeFromGroup(groupId, getState().getIn(['listAdder', 'accountId'])));
 };
-

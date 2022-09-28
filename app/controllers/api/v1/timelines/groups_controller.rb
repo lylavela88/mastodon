@@ -49,11 +49,11 @@ class Api::V1::Timelines::GroupsController < Api::BaseController
   end
 
   def next_path
-    api_v1_timelines_group_url pagination_params(max_id: pagination_max_id)
+    api_v1_timelines_groups_url pagination_params(max_id: pagination_max_id)
   end
 
   def prev_path
-    api_v1_timelines_group_url pagination_params(min_id: pagination_since_id)
+    api_v1_timelines_groups_url pagination_params(min_id: pagination_since_id)
   end
 
   def pagination_max_id

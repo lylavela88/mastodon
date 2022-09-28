@@ -29,7 +29,7 @@ code {
         }
       }
 
-      .radio>label {
+      .radio > label {
         position: relative;
         padding-left: 28px;
 
@@ -45,7 +45,7 @@ code {
       position: relative;
       margin-bottom: 0;
 
-      .label_input>label {
+      .label_input > label {
         font-family: inherit;
         font-size: 14px;
         padding-top: 5px;
@@ -151,7 +151,7 @@ code {
     .label_input {
       display: flex;
 
-      &>label {
+      & > label {
         font-family: inherit;
         font-size: 14px;
         color: $primary-text-color;
@@ -173,7 +173,7 @@ code {
   }
 
   .input.with_label {
-    .label_input>label {
+    .label_input > label {
       font-family: inherit;
       font-size: 14px;
       color: $primary-text-color;
@@ -195,13 +195,13 @@ code {
   .input-text {
     background-color: $inverted-text-color;
     color: $simple-background-color;
-
+    
   }
-
+  
   .input.with_block_label {
     max-width: none;
 
-    &>label {
+    & > label {
       font-family: inherit;
       font-size: 16px;
       color: $primary-text-color;
@@ -512,7 +512,6 @@ code {
         text-align: center;
 
         &.rich-formatting {
-
           &,
           p {
             color: $primary-text-color;

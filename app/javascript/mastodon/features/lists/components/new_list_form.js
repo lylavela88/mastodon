@@ -45,7 +45,7 @@ class NewListForm extends React.PureComponent {
     this.props.onSubmit();
   }
 
-  render() {
+  render () {
     const { value, disabled, intl } = this.props;
 
     const label = intl.formatMessage(messages.label);

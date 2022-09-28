@@ -51,11 +51,11 @@ class NewGroupForm extends React.PureComponent {
     e.preventDefault();
     this.props.onSubmit();
   }
-  accessibility = v => {
+  accessibility = v =>{
     const params = { ...this.state.newGroupValues };
     params['is_private'] = v
     this.setState({ 'newGroupValues': params });
-
+    
   }
 
   handleClick = () => {
@@ -124,17 +124,17 @@ class NewGroupForm extends React.PureComponent {
 
           <label>
             Public
-            <input type='radio' name='is_private' value={'false'} onChange={() => this.accessibility('false')} />
+            <input type='radio' name='is_private' value={'false'} onChange={()=>this.accessibility('false')} />
           </label>
           <label>
             Private
-            <input type='radio' name='is_private' value={'true'} onChange={() => this.accessibility('true')} />
+            <input type='radio' name='is_private' value={'true'}  onChange={()=>this.accessibility('true')} />
           </label>
 
         </div>
 
 
-        <div className='input with_block_label' style={{ marginTop: "50px" }}>
+        <div className='input with_block_label' style={{marginTop:"50px"}}>
           <div className='row'>
 
             <Button form='live-stream-form' onClick={this.handleClick} ref={this.setRef} >

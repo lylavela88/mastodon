@@ -21,6 +21,7 @@ const NavigationPanel = () => (
 
     <NavLink className='column-link column-link--transparent' to='/favourites'><Icon className='column-link__icon' id='heart' fixedWidth />My Likes</NavLink>
     <NavLink className='column-link column-link--transparent' to='/timelines/groups' data-preview-title-id='column.community' data-preview-icon='users' ><Icon className='column-link__icon' id='users' fixedWidth /><FormattedMessage id='navigation_bar.groups' defaultMessage='Groups' /></NavLink>
+
     <a className='column-link column-link--transparent' href='https://dingdash.com/dingdocs.html'><Icon className='column-link__icon' id='question' fixedWidth />Help Documentation</a>
     <NavLink className='column-link column-link--transparent' to='/lists'><Icon className='column-link__icon' id='list-ul' fixedWidth /><FormattedMessage id='navigation_bar.lists' defaultMessage='Lists' /></NavLink>
 

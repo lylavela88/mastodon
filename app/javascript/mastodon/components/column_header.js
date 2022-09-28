@@ -122,7 +122,12 @@ class ColumnHeader extends React.PureComponent {
         </div>
       );
     } else if (multiColumn) {
-      pinButton = <button key='pin-button' className='text-btn column-header__setting-btn' onClick={this.handlePin}><Icon id='plus' /> <FormattedMessage id='column_header.pin' defaultMessage='Pin' /></button>;
+      {createGroupBtn &&
+        <div className='column-header__buttons'>
+          <button onClick={this.redirectToNewGroupForm} className={collapsibleButtonClassName} >
+            {createGroupTitle}
+          </button>
+        </div> }      pinButton = <button key='pin-button' className='text-btn column-header__setting-btn' onClick={this.handlePin}><Icon id='plus' /> <FormattedMessage id='column_header.pin' defaultMessage='Pin' /></button>;
     }
 
     if (!pinned && (multiColumn || showBackButton)) {
@@ -158,13 +163,12 @@ class ColumnHeader extends React.PureComponent {
               {title}
             </button>
           )}
-          {createGroupBtn &&
+           {createGroupBtn &&
             <div className='column-header__buttons'>
               <button onClick={this.redirectToNewGroupForm} className={collapsibleButtonClassName} >
                 {createGroupTitle}
               </button>
-            </div>}
-
+            </div> }
 
           {!hasTitle && backButton}
 

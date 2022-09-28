@@ -5,11 +5,12 @@ class Api::V1::GroupMembersController < Api::BaseController
   before_action -> { doorkeeper_authorize! :write, :'write:group_members' }, except: [:index]
 
   before_action :require_user!
+  before_action :find_group, only: [:index]
   before_action :find_group_member, only: [:destroy, :update]
 
   def index
-    @group_members = @group.members
-    render json: @group_members, serializer: REST::GroupMemberSerializer
+    @group_members = @group.group_members
+    render json: @group_members, each_serializer: REST::GroupMemberSerializer
   end
 
   def create
@@ -18,8 +19,8 @@ class Api::V1::GroupMembersController < Api::BaseController
   end
 
   def update
-    @group_member = @group_member.update!(group_member_params)
-    render json: @group_member, serializer: REST::GroupMemberSerializer
+    @grp_member = @group_member.update!(group_member_params)
+    render json: @grp_member, each_serializer: REST::GroupMemberSerializer
   end
 
   def destroy
@@ -35,6 +36,10 @@ class Api::V1::GroupMembersController < Api::BaseController
 
   def find_group_member
     @group_member = GroupMember.find_by(id: group_member_params[:id])
+  end
+
+  def find_group
+    @group = Group.find_by(id: params[:group_id])
   end
 end
     

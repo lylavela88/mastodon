@@ -16,7 +16,7 @@ class Api::V1::GroupsController < Api::BaseController
 
   def search
     @groups = Group.only_public.where("title ILIKE :search OR category ILIKE :search", search: "%#{params[:search]}%")
-    render json: @groups, serializer: REST::GroupSerializer
+    render json: @groups, each_serializer: REST::GroupSerializer
   end
 
   private

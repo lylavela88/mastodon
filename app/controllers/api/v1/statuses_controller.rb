@@ -34,7 +34,7 @@ class Api::V1::StatusesController < Api::BaseController
   end
 
   def create
-    authorize Status.new(status_params[:group_id]), :can_post?
+    authorize Status.new(group_id: status_params[:group_id]), :can_post?
 
     @status = PostStatusService.new.call(current_user.account,
                                          text: status_params[:status],
