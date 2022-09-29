@@ -50,14 +50,6 @@ class Groups extends ImmutablePureComponent {
   render() {
     const { intl, shouldUpdateScroll, groups } = this.props;
 
-    // if (!groups) {
-    //   return (
-    //     <Column>
-    //       <LoadingIndicator />
-    //     </Column>
-    //   );
-    // }
-
     const emptyMessage = <FormattedMessage id='empty_column.groups' defaultMessage="You don't have any groups yet." />;
 
     return (
@@ -72,9 +64,6 @@ class Groups extends ImmutablePureComponent {
           emptyMessage={emptyMessage}
           prepend={<ColumnSubheading text={intl.formatMessage(messages.subheading)} />}
         >
-          {/* {groups.map(group =>
-            <ColumnLink key={group.get('id')} to={`/timelines/groups/${list.get('id')}`} icon='list-ul' text={list.get('title')} />
-          )} */}
         </ScrollableList>
       </Column>
     );

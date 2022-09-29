@@ -56,7 +56,7 @@ class ColumnHeader extends React.PureComponent {
   }
 
   redirectToNewGroupForm = () => {
-    this.context.router.history.push('/timelines/group-new');
+    this.context.router.history.push('/timelines/group/new');
   }
   handleMoveLeft = () => {
     this.props.onMove(-1);

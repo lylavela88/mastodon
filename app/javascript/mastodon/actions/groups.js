@@ -100,30 +100,6 @@ export const fetchGroupsFail = error => ({
   error,
 });
 
-export const submitListEditor = shouldReset => (dispatch, getState) => {
-  const groupId = getState().getIn(['listEditor', 'listId']);
-  const title  = getState().getIn(['listEditor', 'title']);
-
-  if (listId === null) {
-    dispatch(createGroup(title, shouldReset));
-  } else {
-    // dispatch(updateList(listId, title, shouldReset));
-  }
-};
-
-export const setupListEditor = listId => (dispatch, getState) => {
-  dispatch({
-    type: LIST_EDITOR_SETUP,
-    list: getState().getIn(['lists', listId]),
-  });
-
-  dispatch(fetchListAccounts(listId));
-};
-
-export const changeListEditorTitle = value => ({
-  type: LIST_EDITOR_TITLE_CHANGE,
-  value,
-});
 
 export const createGroup = (value, shouldReset) => (dispatch, getState) => {
   dispatch(createGroupRequest());
@@ -131,10 +107,6 @@ export const createGroup = (value, shouldReset) => (dispatch, getState) => {
   api(getState).post('/api/v1/groups', value).then(({ data }) => {
     console.log(data)
     dispatch(createGroupSuccess(data));
-
-    // if (shouldReset) {
-    //   dispatch(resetListEditor());
-    // }
   }).catch(err => dispatch(createGroupFail(err)));
 };
 
@@ -158,31 +130,14 @@ export const updateGroup = (id, title, shouldReset) => (dispatch, getState) => {
   api(getState).put(`/api/v1/groups/${id}`, { title }).then(({ data }) => {
     dispatch(updateGroupSuccess(data));
 
-    // if (shouldReset) {
-    //   dispatch(resetListEditor());
-    // }
   }).catch(err => dispatch(updateGroupFail(id, err)));
 };
 
-// export const updateGroupRequest = id => ({
-//   type: GROUP_UPDATE_REQUEST,
-//   id,
-// });
+export const updateGroupRequest = id => ({
+  type: GROUP_UPDATE_REQUEST,
+  id,
+});
 
-// export const updateGroupSuccess = list => ({
-//   type: LIST_UPDATE_SUCCESS,
-//   list,
-// });
-
-// export const updateListFail = (id, error) => ({
-//   type: LIST_UPDATE_FAIL,
-//   id,
-//   error,
-// });
-
-// export const resetListEditor = () => ({
-//   type: LIST_EDITOR_RESET,
-// });
 
 export const deletegGroup = id => (dispatch, getState) => {
   dispatch(deleteGroupRequest(id));
@@ -235,34 +190,6 @@ export const fetchGroupMembersFail = (id, error) => ({
   error,
 });
 
-// export const fetchListSuggestions = q => (dispatch, getState) => {
-//   const params = {
-//     q,
-//     resolve: false,
-//     limit: 4,
-//     following: true,
-//   };
-
-//   api(getState).get('/api/v1/accounts/search', { params }).then(({ data }) => {
-//     dispatch(importFetchedAccounts(data));
-//     dispatch(fetchListSuggestionsReady(q, data));
-//   }).catch(error => dispatch(showAlertForError(error)));
-// };
-
-// export const fetchListSuggestionsReady = (query, accounts) => ({
-//   type: LIST_EDITOR_SUGGESTIONS_READY,
-//   query,
-//   accounts,
-// });
-
-// export const clearListSuggestions = () => ({
-//   type: LIST_EDITOR_SUGGESTIONS_CLEAR,
-// });
-
-// export const changeListSuggestions = value => ({
-//   type: LIST_EDITOR_SUGGESTIONS_CHANGE,
-//   value,
-// });
 
 export const addToGroupEditor = accountId => (dispatch, getState) => {
   dispatch(addToGroup(getState().getIn(['listEditor', 'listId']), accountId));
@@ -329,23 +256,6 @@ export const removeFromGroupFail = (groupId, accountId, error) => ({
 export const resetGroupAdder = () => ({
   type: GROUP_ADDER_RESET,
 });
-
-// export const setupListAdder = accountId => (dispatch, getState) => {
-//   dispatch({
-//     type: LIST_ADDER_SETUP,
-//     account: getState().getIn(['accounts', accountId]),
-//   });
-//   dispatch(fetchLists());
-//   dispatch(fetchAccountLists(accountId));
-// };
-
-// export const fetchAccountLists = accountId => (dispatch, getState) => {
-//   dispatch(fetchAccountListsRequest(accountId));
-
-//   api(getState).get(`/api/v1/accounts/${accountId}/lists`)
-//     .then(({ data }) => dispatch(fetchAccountListsSuccess(accountId, data)))
-//     .catch(err => dispatch(fetchAccountListsFail(accountId, err)));
-// };
 
 export const fetchAccountGroupsRequest = id => ({
   type: GROUP_MEMBER_GROUPS_FETCH_REQUEST,
