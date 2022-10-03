@@ -40,6 +40,10 @@ export function NewGroup () {
   return import(/* webpackChunkName: "features/group_timeline" */'../../groups');
 }
 
+export function GroupDetail () {
+  return import(/* webpackChunkName: "features/group_timeline" */'../../group_detail');
+}
+
 export function Lists () {
   return import(/* webpackChunkName: "features/lists" */'../../lists');
 }

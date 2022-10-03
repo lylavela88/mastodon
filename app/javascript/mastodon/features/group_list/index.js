@@ -13,7 +13,6 @@ import ColumnSubheading from '../ui/components/column_subheading';
 import NewGroupForm from './components/new_group_form';
 import { createSelector } from 'reselect';
 import ScrollableList from '../../components/scrollable_list';
-import GroupList from '../group_list'
 
 const messages = defineMessages({
   heading: { id: 'column.groups', defaultMessage: 'New Group' },
@@ -24,7 +23,6 @@ const getGroups = createSelector([state => state.get('groups')], groups => {
   if (!groups) {
     return [];
   }
-
   return groups.toList().filter(item => !!item).sort((a, b) => a.get('title').localeCompare(b.get('title')));
 });
 
@@ -37,7 +35,7 @@ const mapStateToProps = state => ({
 export default @connect(mapStateToProps)
 
 @injectIntl
-class Groups extends ImmutablePureComponent {
+class GroupList extends ImmutablePureComponent {
   static propTypes = {
     params: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
@@ -54,13 +52,21 @@ class Groups extends ImmutablePureComponent {
     const { intl, shouldUpdateScroll, groups } = this.props;
 
     const emptyMessage = <FormattedMessage id='empty_column.groups' defaultMessage="You don't have any groups yet." />;
-    return (
-      <Column icon='list-ul' heading={intl.formatMessage(messages.heading)}>
-        <ColumnBackButtonSlim />
 
-        <NewGroupForm />
-        <GroupList />
-      </Column>
+
+    return (
+
+      <ScrollableList
+        scrollKey='groups'
+        shouldUpdateScroll={shouldUpdateScroll}
+        emptyMessage={emptyMessage}
+        prepend={<ColumnSubheading text={intl.formatMessage(messages.subheading)} />}
+      >
+        {groups.map(group =>
+          <ColumnLink key={group.get('id')} to={`/timelines/group/${group.get('id')}`} icon='list-ul' text={group.get('title')} />
+        )}
+
+      </ScrollableList>
     );
   }
 
