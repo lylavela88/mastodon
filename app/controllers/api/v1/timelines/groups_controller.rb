@@ -36,7 +36,12 @@ class Api::V1::Timelines::GroupsController < Api::BaseController
   end
 
   def account_group_feed
-    grp_ids = Group.where(owner_id: current_user&.id).ids
+    grp_ids = if current_user.admin?
+                Group.where(owner_id: current_user&.id).ids
+              else
+                Group.joins(:members).where('group_members.member_id = ?', current_user.id)
+              end
+
     GroupFeed.new(grp_ids)
   end
 

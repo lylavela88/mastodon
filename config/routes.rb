@@ -381,7 +381,7 @@ Rails.application.routes.draw do
         resource :accounts, only: [:show, :create, :destroy], controller: 'lists/accounts'
       end
 
-      resources :groups, only: [:create, :index] do
+      resources :groups, only: [:create, :index, :show] do
         get :search, on: :collection
       end
 
