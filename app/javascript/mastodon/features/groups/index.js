@@ -20,18 +20,8 @@ const messages = defineMessages({
   subheading: { id: 'groups.subheading', defaultMessage: 'Your Groups' },
 });
 
-const getGroups = createSelector([state => state.get('groups')], groups => {
-  if (!groups) {
-    return [];
-  }
-
-  return groups.toList().filter(item => !!item).sort((a, b) => a.get('title').localeCompare(b.get('title')));
-});
-
-
 
 const mapStateToProps = state => ({
-  groups: getGroups(state),
 });
 
 export default @connect(mapStateToProps)
@@ -41,17 +31,15 @@ class Groups extends ImmutablePureComponent {
   static propTypes = {
     params: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    groups: ImmutablePropTypes.Groups,
     intl: PropTypes.object.isRequired,
   };
 
   componentWillMount() {
-
     this.props.dispatch(fetchGroups());
   }
 
   render() {
-    const { intl, shouldUpdateScroll, groups } = this.props;
+    const { intl, shouldUpdateScroll } = this.props;
 
     const emptyMessage = <FormattedMessage id='empty_column.groups' defaultMessage="You don't have any groups yet." />;
     return (
@@ -59,7 +47,6 @@ class Groups extends ImmutablePureComponent {
         <ColumnBackButtonSlim />
 
         <NewGroupForm />
-        <GroupList />
       </Column>
     );
   }

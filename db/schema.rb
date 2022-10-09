@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_20_033114) do
+ActiveRecord::Schema.define(version: 2022_10_09_111544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,11 +123,11 @@ ActiveRecord::Schema.define(version: 2022_09_20_033114) do
     t.string "url"
     t.string "avatar_file_name"
     t.string "avatar_content_type"
-    t.integer "avatar_file_size"
+    t.bigint "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string "header_file_name"
     t.string "header_content_type"
-    t.integer "header_file_size"
+    t.bigint "header_file_size"
     t.datetime "header_updated_at"
     t.string "avatar_remote_url"
     t.datetime "subscription_expires_at"
@@ -221,7 +221,7 @@ ActiveRecord::Schema.define(version: 2022_09_20_033114) do
     t.string "domain"
     t.string "image_file_name"
     t.string "image_content_type"
-    t.integer "image_file_size"
+    t.bigint "image_file_size"
     t.datetime "image_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -311,6 +311,7 @@ ActiveRecord::Schema.define(version: 2022_09_20_033114) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "can_post", default: false
+    t.integer "is_admin", default: 0
     t.index ["group_id"], name: "index_group_members_on_group_id"
     t.index ["member_id"], name: "index_group_members_on_member_id"
   end
@@ -346,7 +347,7 @@ ActiveRecord::Schema.define(version: 2022_09_20_033114) do
     t.datetime "updated_at", null: false
     t.string "data_file_name"
     t.string "data_content_type"
-    t.integer "data_file_size"
+    t.bigint "data_file_size"
     t.datetime "data_updated_at"
     t.bigint "account_id", null: false
     t.boolean "overwrite", default: false, null: false
@@ -386,7 +387,7 @@ ActiveRecord::Schema.define(version: 2022_09_20_033114) do
     t.bigint "status_id"
     t.string "file_file_name"
     t.string "file_content_type"
-    t.integer "file_file_size"
+    t.bigint "file_file_size"
     t.datetime "file_updated_at"
     t.string "remote_url", default: "", null: false
     t.datetime "created_at", null: false
@@ -524,7 +525,7 @@ ActiveRecord::Schema.define(version: 2022_09_20_033114) do
     t.string "description", default: "", null: false
     t.string "image_file_name"
     t.string "image_content_type"
-    t.integer "image_file_size"
+    t.bigint "image_file_size"
     t.datetime "image_updated_at"
     t.integer "type", default: 0, null: false
     t.text "html", default: "", null: false
@@ -615,7 +616,7 @@ ActiveRecord::Schema.define(version: 2022_09_20_033114) do
     t.string "var", default: "", null: false
     t.string "file_file_name"
     t.string "file_content_type"
-    t.integer "file_file_size"
+    t.bigint "file_file_size"
     t.datetime "file_updated_at"
     t.json "meta"
     t.datetime "created_at", null: false

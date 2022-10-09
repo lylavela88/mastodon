@@ -1,48 +1,48 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
-import Column from '../ui/components/column';
-import ColumnBackButtonSlim from '../../components/column_back_button_slim';
-import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
-import ImmutablePureComponent from 'react-immutable-pure-component';
-import { createSelector } from 'reselect';
+
+import GroupHome from './components/home'
+import JoinGroup from './components/joinGroup'
+import GroupTimeline from './components/group-timeline'
+import { useSelector, useDispatch } from 'react-redux';
 import { fetchGroupDetail } from '../../actions/groups';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { prototype } from 'http-link-header';
 
-const messages = defineMessages({
-  heading: { id: 'column.groups', defaultMessage: 'Group' },
-  subheading: { id: 'groups.subheading', defaultMessage: 'Your Groups' },
-});
-
-
-const mapStateToProps = (state, props) => ({
-  group: state.getIn(['groups', props.params.id])
-});
-
-export default @connect(mapStateToProps)
-@injectIntl
-class GroupDetail extends ImmutablePureComponent {
-  static propTypes = {
-    params: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    group: ImmutablePropTypes.Group,
-    intl: PropTypes.object.isRequired,
-  };
-
-  componentWillMount() {
-    this.props.dispatch(fetchGroupDetail(this.props.params.id));
+const GroupDetail = (props) => {
+  const dispatch = useDispatch()
+  const [groupDetail, setDetail] = useState(null)
+  const [user, setUser] = useState(null)
+  const data = useSelector(state => state.get("group_detail"));
+  const getData = () => {
+    dispatch(fetchGroupDetail(props.params.id))
   }
+  useEffect(() => {
+    if (data) {
+      setDetail(data.group_detail)
+    }
+  }, [data])
+  useEffect(() => {
+    getData();
+    const _user = localStorage.getItem('user')
+    setUser(JSON.parse(_user))
+  }, []);
 
-  render() {
-    const { intl, shouldUpdateScroll, group } = this.props;
 
-    const emptyMessage = <FormattedMessage id='empty_column.groups' defaultMessage="You don't have any groups yet." />;
-    return (
-      <Column icon='list-ul' heading={intl.formatMessage(messages.heading)}>
-        <ColumnBackButtonSlim />
+  return (
+    <>
+      {(groupDetail && groupDetail) ? (
 
-      </Column>
-    );
-  }
+        <GroupTimeline group_id={props.params.id} title={groupDetail ? groupDetail.title : ""} />)
+        :
+        <JoinGroup />}
+    </>
+  );
 
 }
+GroupDetail.propTypes = {
+  params: PropTypes.object
+};
+
+export default GroupDetail;

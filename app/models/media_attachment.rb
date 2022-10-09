@@ -7,7 +7,7 @@
 #  status_id           :bigint(8)
 #  file_file_name      :string
 #  file_content_type   :string
-#  file_file_size      :integer
+#  file_file_size      :bigint(8)
 #  file_updated_at     :datetime
 #  remote_url          :string           default(""), not null
 #  created_at          :datetime         not null

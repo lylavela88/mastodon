@@ -20,53 +20,66 @@ const messages = defineMessages({
 });
 
 const getGroups = createSelector([state => state.get('groups')], groups => {
+
   if (!groups) {
     return [];
   }
   return groups.toList().filter(item => !!item).sort((a, b) => a.get('title').localeCompare(b.get('title')));
 });
 
-
-
-const mapStateToProps = state => ({
-  groups: getGroups(state),
+const getSuggestedGroups = createSelector([state => state.get('suggestedgroups')], suggestedgroups => {
+  if (!suggestedgroups) {
+    return [];
+  }
+  return suggestedgroups;
 });
 
-export default @connect(mapStateToProps)
+const mapStateToProps = state => {
+  return ({
+  groups: getGroups(state),
+  suggestedGroups: getSuggestedGroups(state)
+})};
 
+export default @connect(mapStateToProps)
 @injectIntl
 class GroupList extends ImmutablePureComponent {
+
   static propTypes = {
-    params: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    groups: ImmutablePropTypes.Groups,
     intl: PropTypes.object.isRequired,
   };
 
   componentWillMount() {
 
-    this.props.dispatch(fetchGroups());
+    this.props.dispatch(fetchGroups(this.props.myGroup));
   }
 
   render() {
-    const { intl, shouldUpdateScroll, groups } = this.props;
+    const { intl, shouldUpdateScroll, groups, myGroup, suggestedGroups } = this.props;
 
     const emptyMessage = <FormattedMessage id='empty_column.groups' defaultMessage="You don't have any groups yet." />;
 
 
     return (
+      <>
+        <ScrollableList
+          scrollKey={'groups' + myGroup}
+          shouldUpdateScroll={shouldUpdateScroll}
+          emptyMessage={emptyMessage}
+          prepend={<ColumnSubheading text={myGroup ? intl.formatMessage(messages.subheading) : "Suggested Group"} />}
+        >
+          {myGroup ? (
+            groups.map(group =>
+              <ColumnLink join={group.get('join')} is_private={group.get('is_private')} is_admin={group.get('admin')} key={group.get('id')} to={`/timelines/group/${group.get('id')}`} icon='list-ul' text={group.get('title')} />
+            )
+          ) : (
+            suggestedGroups.map(group =>
+              <ColumnLink key={group.get('id')} to={`/timelines/group/${group.get('id')}`} icon='list-ul' text={group.get('title')} />
+            )
+          )}
+        </ScrollableList>
 
-      <ScrollableList
-        scrollKey='groups'
-        shouldUpdateScroll={shouldUpdateScroll}
-        emptyMessage={emptyMessage}
-        prepend={<ColumnSubheading text={intl.formatMessage(messages.subheading)} />}
-      >
-        {groups.map(group =>
-          <ColumnLink key={group.get('id')} to={`/timelines/group/${group.get('id')}`} icon='list-ul' text={group.get('title')} />
-        )}
-
-      </ScrollableList>
+      </>
     );
   }
 

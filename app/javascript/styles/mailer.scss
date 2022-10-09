@@ -99,7 +99,8 @@ body {
 .col-3,
 .col-4,
 .col-5,
-.col-6, {
+.col-6,
+.col-sm-6 {
   font-size: 0;
   display: inline-block;
   width: 100%;
@@ -164,6 +165,9 @@ body {
 
 .col-6 {
   max-width: 600px;
+}
+.col-sm-6 {
+  max-width: 50%;
 }
 
 .column-cell,
@@ -542,6 +546,9 @@ ul {
     max-width: none !important;
   }
 
+  .col-sm-6 {
+    max-width: 50%;
+  }
   .email-start {
     padding-top: 16px !important;
   }

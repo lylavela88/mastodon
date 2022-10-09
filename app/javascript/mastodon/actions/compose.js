@@ -132,10 +132,15 @@ export function submitCompose(routerHistory) {
     if ((!status || !status.length) && media.size === 0) {
       return;
     }
-
+    let group_id = 0
+    console.log(routerHistory)
+    if (routerHistory.location.pathname.indexOf("/timelines/group/") > -1) {
+       group_id = routerHistory.location.pathname.replace('/timelines/group/','');
+    }
     dispatch(submitComposeRequest());
 
     api(getState).post('/api/v1/statuses', {
+      group_id,
       status,
       in_reply_to_id: getState().getIn(['compose', 'in_reply_to'], null),
       media_ids: media.map(item => item.get('id')),

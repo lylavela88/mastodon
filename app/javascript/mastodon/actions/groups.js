@@ -6,9 +6,16 @@ export const GROUP_FETCH_REQUEST = 'GROUP_FETCH_REQUEST';
 export const GROUP_FETCH_SUCCESS = 'GROUP_FETCH_SUCCESS';
 export const GROUP_FETCH_FAIL = 'GROUP_FETCH_FAIL';
 
+export const GROUP_DETAIL_FETCH_REQUEST = 'GROUP_DETAIL_FETCH_REQUEST';
+export const GROUP_DETAIL_FETCH_SUCCESS = 'GROUP_DETAIL_FETCH_SUCCESS';
+export const GROUP_DETAIL_FETCH_FAIL = 'GROUP_DETAIL_FETCH_FAIL';
+
 export const GROUPS_FETCH_REQUEST = 'GROUPS_FETCH_REQUEST';
 export const GROUPS_FETCH_SUCCESS = 'GROUPS_FETCH_SUCCESS';
 export const GROUPS_FETCH_FAIL = 'GROUPS_FETCH_FAIL';
+export const GROUPS_SUGGESTED_FETCH_REQUEST = 'GROUPS_SUGGESTED_FETCH_REQUEST'
+export const GROUPS_SUGGESTED_FETCH_SUCCESS = 'GROUPS_SUGGESTED_FETCH_SUCCESS'
+export const GROUPS_SUGGESTED_FETCH_FAIL = 'GROUPS_SUGGESTED_FETCH_FAIL'
 
 export const GROUP_EDITOR_TITLE_CHANGE = 'GROUP_EDITOR_TITLE_CHANGE';
 export const GROUP_EDITOR_RESET = 'GROUP_EDITOR_RESET';
@@ -63,31 +70,29 @@ export const fetchList = id => (dispatch, getState) => {
 };
 
 export const fetchGroupRequest = id => ({
-  type: GROUP_FETCH_REQUEST,
+  type: GROUP_DETAIL_FETCH_REQUEST,
   id,
 });
 
-export const fetchGroupSuccess = group => ({
-  type: GROUP_FETCH_SUCCESS,
-  group,
-});
+export const fetchGroupSuccess =groupdetail => { 
+  return ({
+  type: GROUP_DETAIL_FETCH_SUCCESS,
+  groupdetail,
+})
+};
 
 export const fetchGroupFail = (id, error) => ({
-  type: GROUP_FETCH_FAIL,
+  type: GROUP_DETAIL_FETCH_FAIL,
   id,
   error,
 });
 
 export const fetchGroupDetail = id => (dispatch, getState) => {
-  if (getState().getIn(['groups', id])) {
-    return;
-  }
-
   dispatch(fetchGroupRequest(id));
 
-  api(getState).get(`/api/v1/group_members`, {
-    params:{
-      group_id:id
+  api(getState).get(`/api/v1/groups/`+id, {
+    params: {
+      group_id: id
     }
   })
     .then(({ data }) => dispatch(fetchGroupSuccess(data)))
@@ -110,13 +115,23 @@ export const searchGroup = (search) => (dispatch, getState) => {
     .catch(err => dispatch(fetchGroupsFail(err)));
 };
 
-export const fetchGroups = () => (dispatch, getState) => {
-  dispatch(fetchGroupsRequest());
-  api(getState).get('/api/v1/groups')
-    .then(({ data }) => dispatch(fetchGroupsSuccess(data)))
+export const fetchGroups = (v) => (dispatch, getState) => {
+  v ? dispatch(fetchGroupsRequest()) : dispatch(fetchSuggestedGroupRequest())
+  api(getState).get('/api/v1/groups', {
+    params: {
+      member: v
+    }
+  })
+    .then(({ data }) => {
+      return v ? dispatch(fetchGroupsSuccess(data)) : dispatch(fetchSuggestedGroupSuccess(data))
+    })
     .catch(err => dispatch(fetchGroupsFail(err)));
 };
 
+export const fetchSuggestedGroupRequest = () => ({
+  type: GROUPS_SUGGESTED_FETCH_REQUEST,
+
+})
 export const fetchGroupsRequest = () => ({
   type: GROUPS_FETCH_REQUEST,
 });
@@ -125,6 +140,11 @@ export const fetchGroupsSuccess = groups => ({
   type: GROUPS_FETCH_SUCCESS,
   groups,
 });
+export const fetchSuggestedGroupSuccess = suggested_group => {
+  return ({
+  type: GROUPS_SUGGESTED_FETCH_SUCCESS,
+  suggestedgroups:suggested_group,
+})};
 export const fetchGroupsClear = () => ({
   type: GROUPS_FETCH_CLEAR
 });
@@ -139,7 +159,6 @@ export const createGroup = (value, shouldReset) => (dispatch, getState) => {
   dispatch(createGroupRequest());
 
   api(getState).post('/api/v1/groups', value).then(({ data }) => {
-    console.log(data)
     dispatch(createGroupSuccess(data));
   }).catch(err => dispatch(createGroupFail(err)));
 };

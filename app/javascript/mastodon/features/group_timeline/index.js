@@ -119,7 +119,7 @@ class GroupTimeline extends React.PureComponent {
           <ColumnSettingsContainer />
         </ColumnHeader>
 
-        <GroupList />
+        <GroupList myGroup={true}/>
         <StatusListContainer
           trackScroll={!pinned}
           scrollKey={`group_timeline-${columnId}`}

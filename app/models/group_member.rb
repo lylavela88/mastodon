@@ -9,6 +9,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  can_post   :boolean          default(FALSE)
+#  is_admin   :integer          default(0)
 #
 
 class GroupMember < ApplicationRecord
