@@ -83,6 +83,7 @@ class Status < ApplicationRecord
   scope :without_replies, -> { where('statuses.reply = FALSE OR statuses.in_reply_to_account_id = statuses.account_id') }
   scope :without_reblogs, -> { where('statuses.reblog_of_id IS NULL') }
   scope :with_public_visibility, -> { where(visibility: :public) }
+  scope :with_group_id, ->(group_id) { where('statuses.group_id = 2', group_id) }
   scope :tagged_with, ->(tag) { joins(:statuses_tags).where(statuses_tags: { tag_id: tag }) }
   scope :excluding_silenced_accounts, -> { left_outer_joins(:account).where(accounts: { silenced_at: nil }) }
   scope :including_silenced_accounts, -> { left_outer_joins(:account).where.not(accounts: { silenced_at: nil }) }
@@ -279,12 +280,16 @@ class Status < ApplicationRecord
     end
 
     def as_group_timeline(group_ids)
-      where(group_id: group_ids)
+        if group_ids
+          where(group_id: group_ids)
+        end
     end
 
-    def as_public_timeline(account = nil, local_only = false)
+    def as_public_timeline(account = nil, local_only = false, group_id= nil)
       query = timeline_scope(local_only).without_replies
-
+      if group_id
+        query.with_group_id(group_id)
+      end
       apply_timeline_filters(query, account, local_only)
     end
 

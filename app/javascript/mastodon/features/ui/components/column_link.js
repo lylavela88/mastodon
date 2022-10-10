@@ -11,7 +11,6 @@ const ColumnLink = ({ icon, text, to, href, method, badge, is_admin, is_private,
   const AdminIcon = <Icon id={'star'} fixedWidth className='column-link__icon' />;
   const LockIcon = <Icon id={'lock'} fixedWidth className='column-link__icon' />;
   const GlobeIcon = <Icon id={'globe'} fixedWidth className='column-link__icon' />;
-  console.log('is_private', is_private)
   return (
     <>
       {href ? (

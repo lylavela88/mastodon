@@ -9,13 +9,13 @@ import { me } from '../../../initial_state';
 const makeGetStatusIds = () => createSelector([
   (state, { type }) => state.getIn(['settings', type], ImmutableMap()),
   (state, { type }) => state.getIn(['timelines', type, 'items'], ImmutableList()),
-  (state)           => state.get('statuses'),
+  (state) => state.get('statuses'),
 ], (columnSettings, statusIds, statuses) => {
   return statusIds.filter(id => {
     if (id === null) return true;
 
     const statusForId = statuses.get(id);
-    let showStatus    = true;
+    let showStatus = true;
 
     if (columnSettings.getIn(['shows', 'reblog']) === false) {
       showStatus = showStatus && statusForId.get('reblog') === null;
@@ -32,12 +32,12 @@ const makeGetStatusIds = () => createSelector([
 const makeMapStateToProps = () => {
   const getStatusIds = makeGetStatusIds();
 
-  const mapStateToProps = (state, { timelineId }) => ({
+  const mapStateToProps = (state, { timelineId, group_id }) => ({
     statusIds: getStatusIds(state, { type: timelineId }),
-    statuses: state.get('statuses'),
+    statuses:  state.get('statuses'),
     isLoading: state.getIn(['timelines', timelineId, 'isLoading'], true),
     isPartial: state.getIn(['timelines', timelineId, 'isPartial'], false),
-    hasMore:   state.getIn(['timelines', timelineId, 'hasMore']),
+    hasMore: state.getIn(['timelines', timelineId, 'hasMore']),
   });
 
   return mapStateToProps;

@@ -6,7 +6,12 @@ class Api::V1::Timelines::PublicController < Api::BaseController
   respond_to :json
 
   def show
+    if (params[:group_id])
+    @statuses = Status.as_group_timeline(params[:group_id])
+    .paginate_by_id(DEFAULT_STATUSES_LIMIT)
+    else 
     @statuses = load_statuses
+    end
     render json: @statuses, each_serializer: REST::StatusSerializer, relationships: StatusRelationshipsPresenter.new(@statuses, current_user&.account_id)
   end
 
@@ -25,7 +30,9 @@ class Api::V1::Timelines::PublicController < Api::BaseController
       limit_param(DEFAULT_STATUSES_LIMIT),
       params_slice(:max_id, :since_id, :min_id)
     )
-
+    if (params[:group_id])
+        statuses.where(group_id: params[:group_id])
+    end
     if truthy_param?(:only_media)
       # `SELECT DISTINCT id, updated_at` is too slow, so pluck ids at first, and then select id, updated_at with ids.
       status_ids = statuses.joins(:media_attachments).distinct(:id).pluck(:id)
@@ -33,10 +40,11 @@ class Api::V1::Timelines::PublicController < Api::BaseController
     else
       statuses
     end
+
   end
 
   def public_timeline_statuses
-    Status.as_public_timeline(current_account, truthy_param?(:local))
+  Status.as_public_timeline(current_account, truthy_param?(:local), params[:group_id])
   end
 
   def insert_pagination_headers

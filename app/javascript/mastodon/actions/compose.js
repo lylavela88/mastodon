@@ -132,8 +132,7 @@ export function submitCompose(routerHistory) {
     if ((!status || !status.length) && media.size === 0) {
       return;
     }
-    let group_id = 0
-    console.log(routerHistory)
+    let group_id = null;
     if (routerHistory.location.pathname.indexOf("/timelines/group/") > -1) {
        group_id = routerHistory.location.pathname.replace('/timelines/group/','');
     }

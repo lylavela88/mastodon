@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import StatusListContainer from '../../ui/containers/status_list_container';
@@ -11,13 +11,13 @@ import { addColumn, removeColumn, moveColumn } from '../../../actions/columns';
 import ColumnSettingsContainer from '../containers/column_settings_container';
 import { connectPublicStream } from '../../../actions/streaming';
 
-
 const messages = defineMessages({
   title: { id: 'column.public', defaultMessage: 'Exploration timeline' },
 });
 
 const mapStateToProps = (state, { onlyMedia, columnId }) => {
   const uuid = columnId;
+  state.set('statuses',[])
   const columns = state.getIn(['settings', 'columns']);
   const index = columns.findIndex(c => c.get('uuid') === uuid);
 
@@ -72,7 +72,7 @@ class GroupTimeline extends React.PureComponent {
 
   componentDidMount () {
     const { dispatch, onlyMedia } = this.props;
-    dispatch(expandPublicTimeline({ onlyMedia }));
+    dispatch(expandPublicTimeline({ onlyMedia, group_id: this.props.group_id }));
     this.disconnect = dispatch(connectPublicStream({ onlyMedia }));
     this.props.dispatch(updateAllStatuses());
   }
@@ -82,7 +82,7 @@ class GroupTimeline extends React.PureComponent {
       const { dispatch, onlyMedia } = this.props;
 
       this.disconnect();
-      dispatch(expandPublicTimeline({ onlyMedia }));
+      dispatch(expandPublicTimeline({ onlyMedia, group_id: this.props.group_id }));
       this.disconnect = dispatch(connectPublicStream({ onlyMedia }));
     }
   }
@@ -100,12 +100,11 @@ class GroupTimeline extends React.PureComponent {
 
   handleLoadMore = maxId => {
     const { dispatch, onlyMedia } = this.props;
-
-    dispatch(expandPublicTimeline({ maxId, onlyMedia }));
+    dispatch(expandPublicTimeline({ maxId, onlyMedia, group_id: this.props.group_id }));
   }
 
   render () {
-    const { intl, shouldUpdateScroll, columnId, hasUnread, multiColumn, onlyMedia, group_id, title } = this.props;
+    const { intl, shouldUpdateScroll, columnId, hasUnread, multiColumn, onlyMedia, id, title } = this.props;
     const pinned = !!columnId;
 
     return (
@@ -126,6 +125,7 @@ class GroupTimeline extends React.PureComponent {
           timelineId={`public${onlyMedia ? ':media' : ''}`}
           onLoadMore={this.handleLoadMore}
           trackScroll={!pinned}
+          group_id={this.props.group_id}
           scrollKey={`public_timeline-${columnId}`}
           emptyMessage={<FormattedMessage id='empty_column.public' defaultMessage='There is nothing here! Write something publicly, or manually follow users from other servers to fill it up' />}
           shouldUpdateScroll={shouldUpdateScroll}
