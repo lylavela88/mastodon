@@ -11,6 +11,11 @@ export const TIMELINE_EXPAND_REQUEST = 'TIMELINE_EXPAND_REQUEST';
 export const TIMELINE_EXPAND_SUCCESS = 'TIMELINE_EXPAND_SUCCESS';
 export const TIMELINE_EXPAND_FAIL    = 'TIMELINE_EXPAND_FAIL';
 
+export const TIMELINE_GROUP_EXPAND_REQUEST = 'TIMELINE_GROUP_EXPAND_REQUEST';
+export const TIMELINE_GROUP_EXPAND_SUCCESS = 'TIMELINE_GROUP_EXPAND_SUCCESS';
+export const TIMELINE_GROUP_EXPAND_FAIL    = 'TIMELINE_GROUP_EXPAND_FAIL';
+
+
 export const TIMELINE_SCROLL_TOP = 'TIMELINE_SCROLL_TOP';
 
 export const TIMELINE_CONNECT    = 'TIMELINE_CONNECT';
@@ -62,6 +67,9 @@ const parseTags = (tags = {}, mode) => {
   });
 };
 
+
+
+
 export function expandTimeline(timelineId, path, params = {}, done = noOp) {
   return (dispatch, getState) => {
     const timeline = getState().getIn(['timelines', timelineId], ImmutableMap());
@@ -106,6 +114,7 @@ export function expandTimeline(timelineId, path, params = {}, done = noOp) {
 
 export const expandHomeTimeline            = ({ maxId } = {}, done = noOp) => expandTimeline('home', '/api/v1/timelines/home', { max_id: maxId }, done);
 export const expandPublicTimeline          = ({ maxId, onlyMedia, group_id } = {}, done = noOp) => expandTimeline(`public${onlyMedia ? ':media' : ''}`, '/api/v1/timelines/public', { max_id: maxId, only_media: !!onlyMedia, group_id }, done);
+export const expandGroupByIdTimeline          = ({ maxId, onlyMedia, group_id } = {}, done = noOp) => expandTimeline(`group${group_id}`, '/api/v1/timelines/public', { max_id: maxId, only_media: !!onlyMedia, group_id }, done);
 export const expandCommunityTimeline       = ({ maxId, onlyMedia } = {}, done = noOp) => expandTimeline(`community${onlyMedia ? ':media' : ''}`, '/api/v1/timelines/public', { local: true, max_id: maxId, only_media: !!onlyMedia }, done);
 export const expandAccountTimeline         = (accountId, { maxId, withReplies } = {}) => expandTimeline(`account:${accountId}${withReplies ? ':with_replies' : ''}`, `/api/v1/accounts/${accountId}/statuses`, { exclude_replies: !withReplies, max_id: maxId });
 export const expandAccountFeaturedTimeline = accountId => expandTimeline(`account:${accountId}:pinned`, `/api/v1/accounts/${accountId}/statuses`, { pinned: true });
@@ -128,6 +137,15 @@ export function expandTimelineRequest(timeline, isLoadingMore) {
   };
 };
 
+export function expandGroupTimelineRequest(timeline, isLoadingMore) {
+  return {
+    type: TIMELINE_GROUP_EXPAND_REQUEST,
+    timeline,
+    skipLoading: !isLoadingMore,
+  };
+};
+
+
 export function expandTimelineSuccess(timeline, statuses, next, partial, isLoadingRecent, isLoadingMore) {
   return {
     type: TIMELINE_EXPAND_SUCCESS,
@@ -139,6 +157,18 @@ export function expandTimelineSuccess(timeline, statuses, next, partial, isLoadi
     skipLoading: !isLoadingMore,
   };
 };
+export function expandGroupTimelineSuccess(timeline, statuses, next, partial, isLoadingRecent, isLoadingMore) {
+  return {
+    type: TIMELINE_GROUP_EXPAND_SUCCESS,
+    timeline,
+    statuses,
+    next,
+    partial,
+    isLoadingRecent,
+    skipLoading: !isLoadingMore,
+  };
+};
+
 
 export function expandTimelineFail(timeline, error, isLoadingMore) {
   return {

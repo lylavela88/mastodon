@@ -14,7 +14,10 @@ class Api::V1::GroupMembersController < Api::BaseController
   end
 
   def create
-    @group_member = GroupMember.create!(group_member_params)
+    _param = group_member_params;
+    _param[:member_id] = current_user.id
+    puts _param
+    @group_member = GroupMember.create!(_param)
     render json: @group_member, serializer: REST::GroupMemberSerializer
   end
 
@@ -31,7 +34,7 @@ class Api::V1::GroupMembersController < Api::BaseController
   private
 
   def group_member_params
-    params.permit(:id, :group_id, :member_id, :status, :can_post)
+    params.permit(:id, :group_id, :status, :can_post, :member_id)
   end
 
   def find_group_member

@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 
 const GroupHome = (props) => {
   //  const dispatch = useDispatch();
-  console.log("props", props)
 
   return (<>
     <Column icon='list-ul' heading={props ? props.title : ""} >

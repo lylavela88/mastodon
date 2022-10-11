@@ -33,6 +33,7 @@ import polls from './polls';
 import identity_proofs from './identity_proofs';
 import groups from './group'
 import group_detail from './group_detail'
+import group_member from './group_member'
 const reducers = {
   dropdown_menu,
   timelines,
@@ -67,7 +68,8 @@ const reducers = {
   suggestions,
   polls,
   groups,
-  group_detail
+  group_detail,
+  group_member
 };
 
 export default combineReducers(reducers);

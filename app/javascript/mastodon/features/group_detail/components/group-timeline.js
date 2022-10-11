@@ -6,7 +6,7 @@ import StatusListContainer from '../../ui/containers/status_list_container';
 import { updateAllStatuses } from '../../../actions/statuses';
 import Column from '../../../components/column';
 import ColumnHeader from '../../../components/column_header';
-import { expandPublicTimeline } from '../../../actions/timelines';
+import { expandGroupByIdTimeline } from '../../../actions/timelines';
 import { addColumn, removeColumn, moveColumn } from '../../../actions/columns';
 import ColumnSettingsContainer from '../containers/column_settings_container';
 import { connectPublicStream } from '../../../actions/streaming';
@@ -72,7 +72,7 @@ class GroupTimeline extends React.PureComponent {
 
   componentDidMount () {
     const { dispatch, onlyMedia } = this.props;
-    dispatch(expandPublicTimeline({ onlyMedia, group_id: this.props.group_id }));
+    dispatch(expandGroupByIdTimeline({ onlyMedia, group_id: this.props.group_id }));
     this.disconnect = dispatch(connectPublicStream({ onlyMedia }));
     this.props.dispatch(updateAllStatuses());
   }
@@ -82,7 +82,7 @@ class GroupTimeline extends React.PureComponent {
       const { dispatch, onlyMedia } = this.props;
 
       this.disconnect();
-      dispatch(expandPublicTimeline({ onlyMedia, group_id: this.props.group_id }));
+      dispatch(expandGroupByIdTimeline({ onlyMedia, group_id: this.props.group_id }));
       this.disconnect = dispatch(connectPublicStream({ onlyMedia }));
     }
   }
@@ -100,7 +100,7 @@ class GroupTimeline extends React.PureComponent {
 
   handleLoadMore = maxId => {
     const { dispatch, onlyMedia } = this.props;
-    dispatch(expandPublicTimeline({ maxId, onlyMedia, group_id: this.props.group_id }));
+    dispatch(expandGroupByIdTimeline({ maxId, onlyMedia, group_id: this.props.group_id }));
   }
 
   render () {
@@ -122,7 +122,7 @@ class GroupTimeline extends React.PureComponent {
         </ColumnHeader>
 
         <StatusListContainer
-          timelineId={`public${onlyMedia ? ':media' : ''}`}
+          timelineId={`group${this.props.group_id}`}
           onLoadMore={this.handleLoadMore}
           trackScroll={!pinned}
           group_id={this.props.group_id}

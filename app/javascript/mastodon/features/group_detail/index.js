@@ -15,14 +15,6 @@ const GroupDetail = (props) => {
   const [groupDetail, setDetail] = useState(null)
   const [user, setUser] = useState(null)
   const data = useSelector(state => state.get("group_detail"));
-  useSelector(state => {
-    state.remove("statuses"); 
-    
-    state.remove("timelines"); 
-    state.set("statuses",[]); 
-    
-    state.remove("timelines"); 
- })
   const getData = () => {
     dispatch(fetchGroupDetail(props.params.id))
   }
@@ -33,18 +25,23 @@ const GroupDetail = (props) => {
   }, [data])
   useEffect(() => {
     getData();
-    const _user = localStorage.getItem('user')
-    setUser(JSON.parse(_user))
   }, []);
+  const group_member = useSelector(state => (state.get('group_member')));
+
+  useEffect(() => {
+    if (group_member && group_member.status === 'confirmed' && group_member.group_id == props.params.id) {
+      setDetail({ ...groupDetail, joined: true })
+    }
+  }, [group_member])
 
 
   return (
     <>
-      {(groupDetail && groupDetail) ? (
+      {(groupDetail && groupDetail.joined) ? (
 
         <GroupTimeline group_id={props.params.id} title={groupDetail ? groupDetail.title : ""} />)
         :
-        <JoinGroup />}
+        <JoinGroup group_id={props.params.id} is_private={groupDetail ? groupDetail.is_private : true} title={groupDetail ? groupDetail.title : ""} />}
     </>
   );
 
