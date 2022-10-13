@@ -311,7 +311,7 @@ ActiveRecord::Schema.define(version: 2022_10_09_111544) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "can_post", default: false
-    t.integer "is_admin", default: 0
+    t.integer "is_admin"
     t.index ["group_id"], name: "index_group_members_on_group_id"
     t.index ["member_id"], name: "index_group_members_on_member_id"
   end
