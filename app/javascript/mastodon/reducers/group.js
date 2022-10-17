@@ -36,19 +36,11 @@ export default function groups(state = initialState, action) {
     case GROUP_FETCH_SUCCESS:
     case GROUP_CREATE_SUCCESS:
     case GROUP_UPDATE_SUCCESS:
-      state =  Object.assign({}, state, {
-        groupdetail: state.groupdetail ? state.groupdetail.concat(action.groupdetail) : action.groupdetail
-      });
-      return state;
-    case GROUPS_SUGGESTED_FETCH_SUCCESS:
-      return state.set('suggestedgroups', action.suggestedgroups);
+      return normalizeGroup(state, action.group);
     case GROUPS_FETCH_SUCCESS:
-
       return normalizeGroups(state, action.groups);
     case GROUPS_FETCH_CLEAR:
-
     case GROUP_DELETE_SUCCESS:
-
     case GROUP_FETCH_FAIL:
       return state.set(action.id, false);
     default:
